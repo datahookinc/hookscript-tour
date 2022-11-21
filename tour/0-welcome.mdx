@@ -3,114 +3,80 @@ title: "Welcome"
 slug: "welcome"
 ---
 
+import { Link } from 'gatsby';
 import { InstructionsWrapper } from './instructions.tsx'
 import { CodeWrapper } from './code.tsx';
 import Button from '@mui/material/Button';
 
 <InstructionsWrapper>
-    # WELCOME TO HOOKSCRIPT! <span style={{ textShadow: "1px 1px var(--dark-purple)"}}>🪝</span>
+	<div className="instructions-main">
+		# WELCOME TO HOOKSCRIPT! <span style={{ textShadow: "1px 1px var(--dark-purple)"}}>🪝</span>
 
-	HookScript is a programming language designed to make data more accessible and easier to share. You can use HookScript to connect
-	to data sources, perform transformations, and produce an output dataset that you can share with others.
+		HookScript is a programming language designed to make data more accessible and easier to share. You can use HookScript to connect
+		to data sources, perform transformations, and produce an output dataset that you can share with others.
 
-	### KEY CONCEPTS
+		### KEY CONCEPTS
 
-	- HookScript is an interpreted language, with static typing
-	- For this tour, HookScript was compiled to WebAssembly (WASM) so it will run entirely in your browser (no downloads, no server calls)
-	- In HookScript you declare **operators** and **streams** for manipulating data
-	- Data is streamed through your operators one row at a time (similar to a big for-each loop)
-	- The language is in active development, so it is missing some core language features (loops anyone!)
+		- HookScript is an interpreted language, with static typing
+		- For this tour, HookScript was compiled to WebAssembly (WASM) so it will run entirely in your browser (no downloads, no server calls)
+		- In HookScript you declare **operators** and **streams** for manipulating data
+		- Data is streamed through your operators one row at a time (similar to a big for-each loop)
+		- Many keywords in the language (e.g., GRAPH, CONFIG, STATE, etc.) are case sensitive and must be uppercase
+		- Semicolons are optional when ending a statement or expression
+		- The language is in active development, so it is missing some core language features (loops anyone!)
 
-	### WHERE TO USE THE LANGUAGE
+		### WHERE TO USE THE LANGUAGE
 
-	The language forms the backbone of a data engine currently under development that makes it easier to connect to data, transform it, and share it with others. The language will be open sourced when it is more stable.
-	
+		The language forms the backbone of a data engine currently under development that makes it easier to connect to data, transform it, and share it with others. The language will be open sourced when it is more stable.
+		
 
-    ### ACTIVE DEVELOPMENT AND DISCOVERY
-	
-	Any feedback is greatly appreciated and issues can be submitted to the GitHub repository.
-	
-	The following feedback is appreciated:
+		### ACTIVE DEVELOPMENT AND DISCOVERY
+		
+		Any feedback is greatly appreciated and issues can be submitted to the <a href="https://github.com/datahookinc/hookscript-tour" target="_blank">GitHub repository</a> or emailed to <a href="mailto:info@datahook.ca">info@datahook.ca</a>
+		
+		The following feedback is appreciated:
 
-	- How to make the language easier to work with for people who are new to programming (e.g., how to simplify the syntax, how to make some concepts easier to understand, etc.)
-	- How to make the language easier to work with for people who want to create and share datasets with others (e.g., syntactic sugar, convenience functions, etc.)
-	- What **operators** need to be developed (e.g., a filter operator, a join operator, etc.)
-	- Any bugs/issues you encounter when working with the language during this tour
-	
-	<br />
-	<br />
-    # READY TO GET HOOKED?
+		- How to make the language easier to work with for people who are new to programming (e.g., how to simplify the syntax, how to make some concepts easier to understand, etc.)
+		- How to make the language easier to work with for people who want to create and share datasets with others (e.g., syntactic sugar, convenience functions, etc.)
+		- What **operators** need to be developed (e.g., a filter operator, a join operator, etc.)
+		- Any bugs/issues you encounter when working with the language during this tour
 
-	<Button
-		style={{
-			fontSize: "1.4rem",
-			backgroundColor: "var(--blue-accent)",
-			color: "white",
-			
-		}}
-		text="something"
-	>
-		<span>Let's cast your line!</span>
-	</Button>
+		<br />
+		<br />
+		# READY TO GET HOOKED?
+
+		<Link to="/tour/1" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+			<Button
+				style={{
+					fontSize: "1.4rem",
+					backgroundColor: "var(--blue-accent)",
+					color: "white",
+					
+				}}
+				text="something"
+			>
+				<span>Get Started</span>
+			</Button>
+		</Link>
+	</div>
 
 </InstructionsWrapper>
 
-<CodeWrapper initialCode={`GRAPH {
-	OUTPUT DATASET(sA): out<name text, age int, row int, stream text> {
-		STATE {
-			let n int = 0;
-		}
-		RUN {
-			// this makes the output non-deterministic (which is to be expected)
-			ONRECORD sA {
-				n = n + 1;
-				$["row"] = n;
-				$["stream"] = "sA";
-			}
-		}
-	}
-	
-	INPUT MDE(): sA<
-		name text,
-		age int,
-		type text,
-		somenumber int,
-		otherNumber int,
-		isTrue text
-	> {
+<CodeWrapper initialCode={`GRAPH {	
+	INPUT MDE(): sA<ColumnA text, ColumnB text> {
 		CONFIG {
 			let c map = {
-				ColumnOrder []text: ["name", "age"],
 				Data map: {
-					name []text: ["josh", "marcy", "pj", "cleo"],
-					age []int: [36,  39, 4, 7],
-				},
-			};
-			return c;
-		}
-		STATE {
-			let n int = 0;
-			let x int = 100;
-			let m map = {
-				name text: "josh",
-				age int: 36,
-			};
-		}
-		RUN {
-			ONRECORD {
-				// n = n + 1;
-				$["name"] = $["name"] + " - " + "concatenated";
-				$["type"] = "cat"; // creates a property dynamically
-				$["somenumber"] = n;
-				$["otherNumber"] = 100;
-				if (c["Data"]["age"][0] == 36) {
-					$["isTrue"] = "Yes, it is true!";
-				} else {
-					$["isTrue"] = "No, it isn't true!";
+					ColumnA []text: ["hello"],
+					ColumnB []text: ["world"],
 				}
 			}
+			return c
 		}
-	};
+	}
+
+	OUTPUT DATASET(sA): out<ColumnA text, ColumnB text> {}
+
 }
 `}>
 </CodeWrapper>

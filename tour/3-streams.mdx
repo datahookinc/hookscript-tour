@@ -1,0 +1,66 @@
+---
+title: "Streams"
+slug: "3"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# STREAMS
+
+		In HookScript you use __`STREAMS`__ to pass data between your operators.
+
+		There are 2 kinds of streams in HookScript:
+
+		- __input streams__ move data into your operator
+		- __output streams__ move data out of your operator
+
+		Not all operators allow for input streams, but all operators have at least one output stream. By definition, __`INPUT`__ operators do not have input streams because they generate their own data.
+
+		To work with streams, you use the following syntax:
+
+		```
+		INPUT MDE(): sA<Name text, Age int> { ... }
+
+		OUTPUT DATASET(sA): out<Name text, Age int> { ... }
+		```
+
+		Input streams immediately follow the operator name and use parentheses __( )__ to list the input streams (similar to function calls in other programming languages)
+
+		In the above example, the __`INPUT MDE`__ operator does not accept input streams, so we leave it empty: __`OPERATOR MDE()`__
+
+		We then declare the operator's output stream(s) by using a colon __:__, naming the stream __sA__, and enclosing its column names and types in angle brackets __\<\>__
+
+		If we were creating multiple output streams we can comma separate them (e.g., __sA\<Name text\>, sB\<Age int\>__). The streams can be named whatever you like, but there can be no whitespace in the name.
+
+		In the above example, the __`OUPUT DATASET`__ operator uses the __sA__ stream created by the __`INPUT MDE`__ operator, so it declares __sA__ as an incoming stream. If it had multiple incoming streams, it would comma
+		separate them (e.g., __(sA, sB)__)
+
+		Finally, the __`OUTPUT DATASET`__ creates its own output stream __`out<Name text, Age int>`__
+
+	</div>
+
+	<Navigation back="/tour/2" index="3" />
+
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`GRAPH {	
+	INPUT MDE(): sA<Name text, Age int> {
+		CONFIG {
+			let c map = {
+				Data map: {
+					Name []text: ["PJ", "Cleo"],
+					Age []int: [5, 8],
+				}
+			}
+			return c
+		}
+	}
+
+	OUTPUT DATASET(sA): out<Name text, Age int> {}
+}
+`}>
+</CodeWrapper>

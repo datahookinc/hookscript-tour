@@ -70,6 +70,7 @@ const StyledCode = styled.section`
             padding-right: 6px;
             box-sizing: border-box;
             line-height: 1.4em;
+            opacity: 0.3;
 
             span {
                 counter-increment:  linenumber;

@@ -1,0 +1,72 @@
+---
+title: "Operators and Streams"
+slug: "2"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# OPERATORS
+
+		In HookScript, you use __`OPERATORS`__ to interact with your data.
+
+		There are 3 kinds of operators in HookScript:
+
+		- __`INPUT OPERATORS`__ connect to a data source (e.g., file, database, API, manual entry) and bring data into your script
+		- __`TRANSFORM OPERATORS`__ allow you to perform transformations on your data (e.g., filtering, calculations, etc.)
+		- __`OUTPUT OPERATORS`__ create a final dataset and run last after all other operators
+
+		You define operators inside of your __`GRAPH`__ block. For this tour, we will be using 4 different operators:
+
+		- __`INPUT MDE`__ is a manual data entry (MDE) operator allowing you to create data directly in your script
+		- __`INPUT FILE`__ connects to a delimited file (e.g., csv) and reads its contents into your script
+		- __`TRANFORM`__ receives streams from upstream operators, performs transformations, and produces streams to be used by downstream operators
+		- __`OUTPUT DATASET`__ receives streams and produces a final dataset
+
+		The following example declares an __`INPUT MDE`__ and passes its data straight to an __`OUTPUT DATASET`__:
+
+		```
+		GRAPH {	
+			INPUT MDE(): sA<Name text, Age int> {
+				CONFIG {
+					let c map = {
+						Data map: {
+							Name []text: ["PJ", "Cleo"],
+							Age []int: [5, 8],
+						},
+					};
+					return c;
+				}
+			}
+
+			OUTPUT DATASET(sA): out<Name text, Age int> {}
+		}
+		```
+
+		Give it a try in the editor!
+	</div>
+
+	<Navigation back="/tour/1" forward="/tour/3" index="2" />
+
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`GRAPH {	
+	INPUT MDE(): sA<Name text, Age int> {
+		CONFIG {
+			let c map = {
+				Data map: {
+					Name []text: ["PJ", "Cleo"],
+					Age []int: [5, 8],
+				}
+			}
+			return c
+		}
+	}
+
+	OUTPUT DATASET(sA): out<Name text, Age int> {}
+}
+`}>
+</CodeWrapper>
