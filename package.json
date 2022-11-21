@@ -1,8 +1,8 @@
 {
-  "name": "hook-script-tour",
+  "name": "hookscript-tour",
   "version": "1.0.0",
   "private": true,
-  "description": "hook-script-tour",
+  "description": "hookscript-tour",
   "author": "josh-weston",
   "keywords": [
     "gatsby"
@@ -16,7 +16,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@mdx-js/react": "^2.1.5",
+    "@mui/material": "^5.10.13",
+    "@types/styled-components": "^5.1.26",
     "babel-plugin-styled-components": "^2.0.7",
     "gatsby": "^4.24.7",
     "gatsby-plugin-image": "^2.24.0",

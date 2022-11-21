@@ -1,0 +1,4 @@
+.instructions {
+    grid-area: instructions;
+    border: 1px solid magenta;
+}
