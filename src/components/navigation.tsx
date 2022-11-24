@@ -34,7 +34,7 @@ export function Navigation({ back,  forward, index }: Props) {
                 </IconButton>
             </Link>
             }
-            <span>{index} of 3</span>
+            <span>{index} of 5</span>
             {forward && 
             <Link to={forward}>
                 <IconButton size="large">

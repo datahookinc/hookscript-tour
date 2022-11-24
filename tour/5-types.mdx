@@ -1,0 +1,37 @@
+---
+title: "INPUT MDE"
+slug: "5"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# VARIABLES AND types
+
+		Coming soon!
+	</div>
+
+	<Navigation back="/tour/4" index="5" />
+
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`GRAPH {	
+	INPUT MDE(): sA<Name text, Age int> {
+		CONFIG {
+			let c map = {
+				Data map: {
+					Name []text: ["PJ", "Cleo"],
+					Age []int: [5, 8],
+				}
+			}
+			return c
+		}
+	}
+
+	OUTPUT DATASET(sA): out<Name text, Age int> {}
+}
+`}>
+</CodeWrapper>

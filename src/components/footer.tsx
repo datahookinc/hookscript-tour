@@ -14,11 +14,7 @@ const StyledFooter = styled.footer`
     text-align: center;
 
     .lobster {
-        font-size: 16px;
-    }
-
-    .lobster::before {
-        content: "🦞"
+        
     }
 
     a {
@@ -35,7 +31,7 @@ const StyledFooter = styled.footer`
 export function Footer() {
     return (
         <StyledFooter>
-            <div>Built with <span className="lobster"></span> in Halifax, Nova Scotia by <a href="https://www.linkedin.com/in/joshweston/" target="_blank">JW</a></div>
+            <div>Built with <img style={{ width: "22px", height: "22px", position: "relative", top: "4px" }} src="/lobster.svg" /> in Halifax, Nova Scotia by <a href="https://www.linkedin.com/in/joshweston/" target="_blank">JW</a></div>
         </StyledFooter>
     )
 }

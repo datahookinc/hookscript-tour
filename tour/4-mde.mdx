@@ -9,49 +9,49 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 <InstructionsWrapper>
 	<div className="instructions-main">
-		# OPERATORS
+		# MDE OPERATOR
 
-		In HookScript, you use __`OPERATORS`__ to interact with your data and __`STREAMS`__ to pass data between your operators.
+		The **MDE OPERATOR** is a special operator that allows you to manually enter data into your script.
 
-		There are 3 kinds of operators in HookScript:
+		To enter your data, you use the MDE Operator's **CONFIG** clause. Most operators require configuration, which is handled by the **CONFIG** clause.
 
-		- __`INPUT OPERATORS`__ connect to a data source (e.g., file, database, API, manual entry) and bring data into your script
-		- __`TRANSFORM OPERATORS`__ allow you to perform transformations on your data (e.g., filtering, calculations, etc.)
-		- __`OUTPUT OPERATORS`__ create a final dataset and run last after all other operators
+		It is idiomatic to declare your **CONFIG** clause at the top of your operator.
 
-		You define operators inside of your __`GRAPH`__ block. For this tour, we will be using 4 different operators:
-
-		- __`INPUT MDE`__ is a manual data entry (MDE) operator allowing you to create data directly in your script
-		- __`INPUT FILE`__ connects to a delimited file (e.g., csv) and reads its contents into your script
-		- __`TRANFORM`__ receives streams from upstream operators, performs transformations, and produces streams to be used by downstream operators
-		- __`OUTPUT DATASET`__ receives streams and produces a final dataset
-
-		The following example declares an __`INPUT MDE`__ and passes its data straight to an __`OUTPUT DATASET`__
-
-		Multiple operators can receive the same stream and HookScript ensure each operator receives all values from the stream individually.
+		The **CONFIG** clause must return a **map** data type, with a property called *Data* that is also a **map** data type, where each property is a column of data. For an MDE, we can use this syntax as a template:
 
 		```
-		GRAPH {	
-			INPUT MDE(): sA<Name text, Age int> {
-				CONFIG {
-					let c map = {
-						Data map: {
-							Name []text: ["PJ", "Cleo"],
-							Age []int: [5, 8],
-						},
-					};
-					return c;
+		CONFIG {
+	 		let c map = {
+	 			Data map: {
+	 				Name []text: ["PJ", "Cleo"],
+	 				Age []int: [5, 8],
+	 			}
+	 		}
+	 		return c
+	 	}
+		```
+
+		In the next section, we will discuss **variables** and **types**, but for now you can change the data produced your MDE by adding more properties to the *Data* map, and adding more entries into each column.
+
+		To add a new column:
+		```
+		CONFIG {
+			let c map = {
+				Data map: {
+					Name []text: ["PJ", "Cleo"],
+					Age []int: [5, 8],
+					Species []text: ["cat", "chonker"],
 				}
 			}
-
-			OUTPUT DATASET(sA): out<Name text, Age int> {}
-		}
+			return c
+	 	}
 		```
+		Note: don't forget to update your streams if you want the new column to be sent. In the above example, the stream would need to become:
 
-		Give it a try in the editor!
+		`INPUT MDE(): sA<Name text, Age int, Species text> { ... }`
 	</div>
 
-	<Navigation back="/tour/1" index="2" />
+	<Navigation back="/tour/3" forward="/tour/5" index="4" />
 
 </InstructionsWrapper>
 

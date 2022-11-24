@@ -21,6 +21,8 @@ import { Navigation } from '../src/components/navigation.tsx'
 		Not all operators allow for input streams, but all operators have at least one output stream. By definition, __`INPUT`__ operators do not have input streams because they generate their own data.
 
 		To work with streams, you use the following syntax:
+		
+		*operatorName*(*inputStream*): *outputstream\<columnName type\>*
 
 		```
 		INPUT MDE(): sA<Name text, Age int> { ... }
@@ -32,9 +34,9 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 		In the above example, the __`INPUT MDE`__ operator does not accept input streams, so we leave it empty: __`OPERATOR MDE()`__
 
-		We then declare the operator's output stream(s) by using a colon __:__, naming the stream __sA__, and enclosing its column names and types in angle brackets __\<\>__
+		We then declare the operator's output stream(s) by using a colon __:__ naming the stream __sA__, and enclosing its column names and types in angle brackets __\<\>__
 
-		If we were creating multiple output streams we can comma separate them (e.g., __sA\<Name text\>, sB\<Age int\>__). The streams can be named whatever you like, but there can be no whitespace in the name.
+		If we were creating multiple output streams we can comma separate them (e.g., __sA\<Name text\>, sB\<Age int\>__). The streams can be named whatever you like, but there can be no whitespace in the name, and they cannot use reserved words.
 
 		In the above example, the __`OUPUT DATASET`__ operator uses the __sA__ stream created by the __`INPUT MDE`__ operator, so it declares __sA__ as an incoming stream. If it had multiple incoming streams, it would comma
 		separate them (e.g., __(sA, sB)__)
@@ -43,7 +45,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 	</div>
 
-	<Navigation back="/tour/2" index="3" />
+	<Navigation back="/tour/2" forward="/tour/4" index="3" />
 
 </InstructionsWrapper>
 
