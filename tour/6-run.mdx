@@ -1,0 +1,92 @@
+---
+title: "RUN CLAUSE"
+slug: "6"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# RUN CLAUSE
+
+		The **RUN** clauses are another way for you to control your operator. Similar to the **CONFIG** clause, you declare **RUN** clauses inside of your operator.
+
+		There are two kinds of RUN clauses:
+		- **ONRECORD** will run each time a record is received from a stream
+		- **ONDONE** will run after all records have been received (this is the last chance to perform logic inside of your operator)
+
+		You declare these clauses like this:
+
+		```
+		CONFIG { ... }
+		RUN {
+			ONRECORD { ... }
+			ONDONE { ... }
+		}
+		```
+
+		If your operator receives one or zero input streams, then you do not need to provide the stream name after declaring **ONRECORD**. However, if your operator does 
+		receive more than one stream, then you must declare the stream name. For example, if my operator receives streams called **sA** and **sB** then I would declare the 
+		previous statement as:
+
+		```
+		CONFIG { ... }
+		RUN {
+			ONRECORD sA { ... }
+			ONRECORD sB { ... }
+			ONDONE { ... }
+		}
+		```
+
+		**RUN** clauses provide a powerful way for interacting with incoming data to perform data manipulations, such as:
+		- calculations
+		- filters
+		- replacing values
+		- sending your own records
+
+		HookScript uses the dollar symbol ( **$** ) to refer to the current record inside of an **ONRECORD** clause. For instance to change a record value, we reference the record's column name and assign a new value:
+
+		```
+		RUN {
+			ONRECORD sa {
+				$["Name"] = "Replacing the incoming name"
+			}
+		}
+		```
+		
+		In the editor example, we filter out all records where the age is less than 8. We also change the value for name.
+	</div>
+
+	<Navigation back="/tour/5" index="6"  />
+
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`GRAPH {	
+	INPUT MDE(): sA<Name text, Age int> {
+		CONFIG {
+			let nameColumn []text = ["PJ", "Cleo"]
+			let ageColumn []int = [5, 8]
+			let c map = {
+				Data map: {
+					Name []text: nameColumn,
+					Age []int: ageColumn
+				}
+			}
+			return c
+		}
+		RUN {
+			ONRECORD {
+				if $["Age"] < 8 {
+					SKIP
+				}
+				$["Name"] = $["Name"] + " - adding new text to the name"
+			}
+		}
+	}
+
+	OUTPUT DATASET(sA): out<Name text, Age int> {}
+}
+`}>
+</CodeWrapper>
