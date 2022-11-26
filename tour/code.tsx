@@ -85,7 +85,6 @@ const StyledCode = styled.section`
     }
 
     .output-container {
-        height: 400px;
         width: 100%;
         position: relative;
         box-sizing: border-box;
