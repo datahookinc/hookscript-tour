@@ -352,16 +352,12 @@ export function CodeWrapper({ initialCode }: Props) {
                 <tbody>
                     {results.data.map((row, i) => 
                         <tr key={`row-${i}`}>
-                            {row.map((cell, j) => <td key={`row-${i}-cell-${j}`}>{cell}</td>)}
+                            {row.map((cell, j) => <td key={`row-${i}-cell-${j}`}>{cell.toString()}</td>)}
                         </tr>    
                     )}
                 </tbody>
             </table>
-
-
         }
-
-
     }
 
     return (
