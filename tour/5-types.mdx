@@ -20,15 +20,14 @@ import { Navigation } from '../src/components/navigation.tsx'
 		- `float` is used for floating point numbers (decimals)
 		- `text` is used for character strings (letters and words)
 		- `bool` is used for boolean values (true or false)
-		- `datetime` is used for storing dates and times
 		
 		## Container types
+		- `map` a hashmap/object with key/value pairs
 		- `[]int` an array (list) of `int`
 		- `[]float` an array (list) of `float`
 		- `[]text` an array (list) of `text`
 		- `[]bool` an array (list) of `bool`
-		- `[]datetime` an array (list) of `datetime`
-		- `map` a hashmap/object with key/value pairs
+		- `[]map` an array (list) of `map`
 
 		To declare a variable, you use the `let` keyword, give the variable a name, specify the variable's type, and assign a value
 
@@ -50,10 +49,6 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 		We have updated the editor to use our new understanding of variables. Looking back at our **CONFIG** clause we see that it returns a **map** type. With this understanding, you can build
 		more complex logic into your **CONFIG** clause, so long as it returns a **map** type.
-
-
-
-
 	</div>
 
 	<Navigation back="/tour/4" forward="/tour/6" index="5" />
