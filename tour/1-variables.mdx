@@ -1,0 +1,78 @@
+---
+title: "Variables"
+slug: "1"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# DECLARING VARIABLES
+
+		In HookScript, you declare variables using the **`var`** keyword:
+
+		```
+		var name = "hook"
+		```
+
+		Variables do not need to be assigned a value immediately. If a value is not assigned, the variable will have a value of **`NULL`** (more on `NULL` later)
+
+		```
+		var name
+		print(name) // NULL
+		```
+		
+		To assign a new value to an existing variable, use the assignment operator ( `=` )
+		
+		```
+		var name = "hook"
+		name = "script"
+		```
+
+		HookScript is a *gradually typed* language, which means you can specify types for variables to improve type checking and reduce runtime errors. For example, if I want a variable to only hold `int` types,
+		I would specify the type after the variable name:
+
+		```
+		var x int = 10
+		x = "a string" // will throw a type check error
+		```
+
+		You can use the gradually typed feature of the language to improve the developer experience by determining how explicit
+		you want to be when writing your code. In the example below, the variable `x` can hold **`any`** type since a type was not provided when `x` was
+		declared:
+
+		```
+		var x = 10 // x is int type
+		x = "Hello World" // x is text type
+		x = true // x is bool type
+		x = 3.14 // x is float type
+		```
+
+		**Note:** use double forward slashes for comments ( `// your comment` )
+	</div>
+	<Navigation back="/tour/welcome" forward="/tour/2" index="1" />
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`// Dynamic Typing
+// --------------
+var x = 10 // x is int type
+print(x)
+
+x = "Hello World" // x is text type
+print(x)
+
+x = true // x is bool type
+print(x)
+
+x = 3.14 // x is float type
+print(x)
+
+// Static Typing
+// -------------
+
+var y int = 10 // y can only be an int
+print(y)
+`}>
+</CodeWrapper>

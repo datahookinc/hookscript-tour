@@ -129,6 +129,7 @@ const StyledCode = styled.section`
                 color: #f0f1f2;
                 font-family: monospace;
                 overflow: auto;
+                white-space: pre-wrap;
                 table {
                     th {
                         text-decoration: underline;
@@ -167,7 +168,8 @@ export function CodeWrapper({ initialCode }: Props) {
     const resizeObserver = useRef<ResizeObserver | null>(null);
     const parentContainer = useRef<HTMLDivElement | null>(null);
     const [error, setError] = useState<null | string>(null);
-    const [results, setResults] = useState<Results | null>(null);
+    // const [results, setResults] = useState<Results | null>(null);
+    const [results, setResults] = useState<String | null>(null);
     const history = useRef<string[]>([]);
 
     useLayoutEffect(() => {
@@ -277,6 +279,11 @@ export function CodeWrapper({ initialCode }: Props) {
                 setEditorCode(previousCode);
             }
         }
+
+        if (e.shiftKey && e.key == 'Enter') {
+            e.preventDefault();
+            handleRun();
+        }
     };
 
     const handleSetLineNums = () => {
@@ -332,32 +339,32 @@ export function CodeWrapper({ initialCode }: Props) {
         history.current = [];
     }
 
-    let resultsTable: React.ReactNode;
-    if (results) {
-        if (results.data.length === 0) {
-            resultsTable = <div>Script did not return any records</div>;
-        } else {
-            resultsTable =
-            <table>
-                <thead>
-                    <tr>
-                        {results.attributes.map(colName => 
-                            <th key={`head-${colName}`}>
-                                {colName}
-                            </th>
-                        )}
-                    </tr>
-                </thead>
-                <tbody>
-                    {results.data.map((row, i) => 
-                        <tr key={`row-${i}`}>
-                            {row.map((cell, j) => <td key={`row-${i}-cell-${j}`}>{cell.toString()}</td>)}
-                        </tr>    
-                    )}
-                </tbody>
-            </table>
-        }
-    }
+    // let resultsTable: React.ReactNode;
+    // if (results) {
+    //     if (results.data.length === 0) {
+    //         resultsTable = <div>Script did not return any records</div>;
+    //     } else {
+    //         resultsTable =
+    //         <table>
+    //             <thead>
+    //                 <tr>
+    //                     {results.attributes.map(colName => 
+    //                         <th key={`head-${colName}`}>
+    //                             {colName}
+    //                         </th>
+    //                     )}
+    //                 </tr>
+    //             </thead>
+    //             <tbody>
+    //                 {results.data.map((row, i) => 
+    //                     <tr key={`row-${i}`}>
+    //                         {row.map((cell, j) => <td key={`row-${i}-cell-${j}`}>{cell.toString()}</td>)}
+    //                     </tr>    
+    //                 )}
+    //             </tbody>
+    //         </table>
+    //     }
+    // }
 
     return (
         <StyledCode ref={parentContainer}>
@@ -407,6 +414,7 @@ export function CodeWrapper({ initialCode }: Props) {
                                 color: "white",
                             }}
                             onClick={handleRun}
+                            title="Run this code [shift-enter]"
                         >
                             Run Code
                         </Button>
@@ -416,7 +424,8 @@ export function CodeWrapper({ initialCode }: Props) {
                         ?
                             <span>{error}</span>
                         :
-                            resultsTable
+                            // resultsTable
+                            <code>{results}</code>
                         }
                     </div>
                 </div>

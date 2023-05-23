@@ -1,6 +1,6 @@
 ---
 title: "EXPRESSION OPERATORS"
-slug: "6"
+slug: "3"
 ---
 
 import { InstructionsWrapper } from './instructions.tsx'
@@ -37,7 +37,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 		## Built-in Functions
 		- **`len()`**: returns an `int` that is the number of characters in a `text` value, the number of elements in an `array` value, or the number of elements in a `map` value
-		- **`append()`**: returns the array with the new element(s) added to the back. This works in-place and does not allocate a new `array`
+		- **`print()`**: prints the provided value to the console; returns the number of bytes written to the console
 
 		Examples:
 
@@ -47,39 +47,35 @@ import { Navigation } from '../src/components/navigation.tsx'
 		10 >= 10 // returns true
 		10 <= 9 // returns false
 		10 + 2 // returns 12
-		10 - 2 returns 8
+		10 - 2 // returns 8
 		10 / 5 // returns 2
 		10 * 5 // returns 50
 		"hello" + " world" // returns "hello world"
 		len("hello world") // returns 11
-		len([]text{"a", "b", "c"}) // returns 3
-		len({ name: "hookscript" }) // returns 1
-		append([]text{"a", "b", "c"}, "d", "e", "f") // returns []text["a", "b", "c", "d", "e", "f"]
+		len(["a", "b", "c"]) // returns 3
 		!true // returns false
 		-(10 * 2) // returns -20
+		print("hello") // prints "hello" to the console; returns 7
 		```
 	</div>
 
-	<Navigation back="/tour/5" index="6" forward="/tour/7" />
+	<Navigation back="/tour/2" forward="/tour/4" index="3" />
 
 </InstructionsWrapper>
 
-<CodeWrapper initialCode={`GRAPH {	
-	INPUT MDE(): sA<Name text, Age int> {
-		CONFIG {
-			let nameColumn []text = ["PJ", "Cleo"]
-			let ageColumn []int = [5, 8]
-			let c map = {
-				Data map: {
-					Name []text: nameColumn,
-					Age []int: ageColumn
-				}
-			}
-			return c
-		}
-	}
-
-	OUTPUT DATASET(sA): out<Name text, Age int> {}
-}
+<CodeWrapper initialCode={`print(10 > 8) // returns true
+print(10 < 8) // returns false
+print(10 >= 10) // returns true
+print(10 <= 9) // returns false
+print(10 + 2) // returns 12
+print(10 - 2) // returns 8
+print(10 / 5) // returns 2
+print(10 * 5) // returns 50
+print("hello" + " world") // returns "hello world"
+print(len("hello world")) // returns 11
+print(len(["a", "b", "c"])) // returns 3
+print(!true) // returns false
+print(-(10 * 2)) // returns -20
+print("hello") // prints "hello" to the console; returns 7
 `}>
 </CodeWrapper>

@@ -1,0 +1,78 @@
+---
+title: "VARIABLES AND TYPES"
+slug: "2"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# VARIABLES AND TYPES
+
+		In HookScript, you can declare your own variables and assign values to the them.
+
+		There are *primitive* types and *container* types
+
+		## Primitive types
+		- `any` - see below
+		- `int` - is used for integers (whole numbers)
+		- `float` - is used for floating point numbers (decimals)
+		- `text` - is used for character strings (letters and words)
+		- `bool` - is used for boolean values (true or false)
+		- `datetime` - (WIP)
+		
+		## Container types
+		- `list` - a list of values
+
+		```
+var a int = 0
+var b float = 1.0
+var c text = "Hello"
+var d bool = true
+var e list = [1, 2, 3]
+var f any = 1
+		```
+
+		## `any` type
+
+		The `any` type is a way to say your variable/container can hold any other type. This allows the language to be more
+		dynamic. Under the hood, HookScript will automatically assign the `any` type whenever the developer does not explicitly declare a type.
+
+		```
+		// these two statements are the same
+		var x = 10
+		var x any = 10
+
+		// these two statements are the same
+		var list = [1, 2, 3]
+		var list<any> = [1, 2, 3]
+		```
+
+		## typecasting with `as` keyword
+
+		The `as` keyword is used to cast from one type to another. This can be useful when assigning values to variables that have declared types.
+
+		```
+		var x float = (5 + 5) as float
+		var x = [1, 2, 3] as list<float>
+		```
+
+		**Note:** an `int` type is automatically cast to a `float` type wherever a `float` is expected
+	</div>
+
+	<Navigation back="/tour/1" forward="/tour/3" index="2" />
+
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`var a int = 0
+var b float = 1.0
+var c text = "Hello"
+var d bool = true
+var e list = [1, 2, 3]
+var f any = 1
+
+print(a, b, c, d, e, f)
+`}>
+</CodeWrapper>

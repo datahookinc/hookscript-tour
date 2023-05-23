@@ -17,13 +17,12 @@ import Button from '@mui/material/Button';
 
 		### KEY CONCEPTS
 
-		- HookScript is an interpreted language, with static typing
+		- HookScript is an interpreted language, with gradual typing
 		- For this tour, HookScript was compiled to WebAssembly (WASM) so it will run entirely in your browser (no downloads, no server calls)
-		- In HookScript you declare **operators** and **streams** for manipulating data
-		- Data is streamed through your operators one row at a time (similar to a big for-each loop)
-		- Many keywords in the language (e.g., GRAPH, CONFIG, STATE, etc.) are case sensitive and must be uppercase
+		- HookScript provides syntax and conventions to make transforming data easier and more enjoyable
 		- Semicolons are optional when ending a statement or expression
-		- The language is in active development, so it is missing some core language features (loops anyone!)
+		- The language is in active development, so it is missing some core language features (dicts/maps, arrow functions, datetime types, locks/immutability, etc.)
+		- You can click the "Run Code" button to run your code, or use `Shift + Enter` as a keyboard shortcut
 
 		### WHERE TO USE THE LANGUAGE
 
@@ -62,21 +61,7 @@ import Button from '@mui/material/Button';
 
 </InstructionsWrapper>
 
-<CodeWrapper initialCode={`GRAPH {	
-	INPUT MDE(): sA<ColumnA text, ColumnB text> {
-		CONFIG {
-			let c map = {
-				Data map: {
-					ColumnA []text: ["hello"],
-					ColumnB []text: ["world"],
-				}
-			}
-			return c
-		}
-	}
-
-	OUTPUT DATASET(sA): out<ColumnA text, ColumnB text> {}
-
-}
+<CodeWrapper initialCode={`var greeting = "Hello world"
+print(greeting)
 `}>
 </CodeWrapper>

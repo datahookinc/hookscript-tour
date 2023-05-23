@@ -1,0 +1,79 @@
+---
+title: "LISTS"
+slug: "4"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# LISTS
+
+		In HookScript, `lists` are a container type that allow you to store multiple values in a single variable
+
+		```
+		var x list = [1, 2, 3]
+		print(len(list)) // returns 3
+		```
+
+		## Retrieving Values by Index
+		To retrive a value from a list, use square brackets with the index of the element (e.g., `[0]`). An error is thrown
+		if the index is out of range. Indexes start at 0.
+
+		```
+		list[2] // returns 1
+		```
+		
+		## Assigning Values by Index
+		To assign a value to a list, use square brackets with the inded of the element (e.g., `[0]`). An error is thrown if the
+		index is out of rnage. Indexes start at 0
+
+		```
+		list[0] = 10
+		```
+	
+		## List Types
+		Lists can hold any type, including other lists. To assign a type to a list, place the type between `<` and `>` characters:
+		
+		```
+		var x list = [1, "hello", true, 3.14]
+		var x list<int> = [1, 2, 3]
+		var x list<float> = [1.1, 2.2, 3.3]
+		var x list<bool> = [true, true, false]
+		var x list<list<int>> = [ [1, 2, 3], [4, 5, 6 ]]
+		```
+
+		When your list contains other lists, you use multiple indexes to retrieve and assign values:
+
+		```
+		var x list<list<int>> = [ [1, 2, 3], [4, 5, 6] ]
+		x[1][2] // returns the 3rd element in the 2nd list, the value 6
+		```
+
+	</div>
+
+	<Navigation back="/tour/3" forward="/tour/5" index="4" />
+
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`GRAPH {	
+	INPUT MDE(): sA<Name text, Age int> {
+		CONFIG {
+			let nameColumn []text = ["PJ", "Cleo"]
+			let ageColumn []int = [5, 8]
+			let c map = {
+				Data map: {
+					Name []text: nameColumn,
+					Age []int: ageColumn
+				}
+			}
+			return c
+		}
+	}
+
+	OUTPUT DATASET(sA): out<Name text, Age int> {}
+}
+`}>
+</CodeWrapper>
