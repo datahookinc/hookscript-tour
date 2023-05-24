@@ -57,21 +57,20 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 <CodeWrapper initialCode={`// Dynamic Typing
 // --------------
-var x = 10 // x is int type
+var x = 10 // x is any type, set to an int value
 print(x)
 
-x = "Hello World" // x is text type
+x = "Hello World" // x is set to a text value
 print(x)
 
-x = true // x is bool type
+x = true // x is set to a bool value
 print(x)
 
-x = 3.14 // x is float type
+x = 3.14 // x is set to a float value
 print(x)
 
 // Static Typing
 // -------------
-
 var y int = 10 // y can only be an int
 print(y)
 `}>

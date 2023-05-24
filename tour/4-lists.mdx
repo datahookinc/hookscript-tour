@@ -11,7 +11,8 @@ import { Navigation } from '../src/components/navigation.tsx'
 	<div className="instructions-main">
 		# LISTS
 
-		In HookScript, `lists` are a container type that allow you to store multiple values in a single variable
+		In HookScript, `lists` are a container type that allow you to store multiple values in a single variable. To create a list,
+		you place your comma separated values between square brackets `[value1, value2, value3, ...]`:
 
 		```
 		var x list = [1, 2, 3]
@@ -58,22 +59,10 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 </InstructionsWrapper>
 
-<CodeWrapper initialCode={`GRAPH {	
-	INPUT MDE(): sA<Name text, Age int> {
-		CONFIG {
-			let nameColumn []text = ["PJ", "Cleo"]
-			let ageColumn []int = [5, 8]
-			let c map = {
-				Data map: {
-					Name []text: nameColumn,
-					Age []int: ageColumn
-				}
-			}
-			return c
-		}
-	}
+<CodeWrapper initialCode={`var x list = [1, "hello", true]
+print(x[1])
 
-	OUTPUT DATASET(sA): out<Name text, Age int> {}
-}
+var y list<list<int>> = [ [1, 2, 3], [4, 5, 6]]
+print(y[1][2])
 `}>
 </CodeWrapper>

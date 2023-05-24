@@ -9,54 +9,75 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 <InstructionsWrapper>
 	<div className="instructions-main">
-		# EXPRESSION OPERATORS
+		# FUNCTIONS
 
-		In HookScript, you can use several operators for performing calculations on your expressions. The allowed operators are dependent on your data _type_, with the following operators currently supported.
+		In HookScript, functions are a way to create reusable code. A function starts with the **`function`** keyword, followed by the function
+		name, then any parameters, its return type and a colon ( `:` ) to indicate the start of the function's body. Functions are terminated with the
+		**`end`** keyword and use the **`return`** keyword to specify the value to return.
 
-		## Comments
-		- **`//`**: two forward slashes allow you to comment out your text, so the evaluator will ignore any text that comes after two forward slashes on that line
+		## Function Statement
 		
-		## Prefix Operators
-		- **`!`** (negation): allows you to negate the value of a boolean expressions (e.g., !true == false)
-		- **`-`** (reverse): syntatic sugar for multiplying an `int` or `float` by -1
+		An untyped function:
+		```
+		function add(x, y):
+			return x + y
+		end
 
-		## Arithmetic Operators
-		- **`+`** (addition): allows you to add two `int` or `float` types, or concatenate `text` types
-		- **`-`** (subtraction): allows you to substract two `int` or `float` types
-		- **`*`** (multiplication): allows you to multiply two `int` or `float` types
-		- **`/`** (division): allows you to divide two `int` or `float` types
-		- **`%`** (modulo): allows you to return the remainder when dividing `int` types
+		var value = add(10, 20)
+		```
 
-		## Comparison Operators
-		- **`==`** (equals): allows you to compare two `int`, `float`, `bool`, or `text` types
-		- **`!=`** (equals): allows you to compare two `int`, `float`, `bool`, or `text` types
-		- **`>`** (greater than): allows you to compare two `int`, `float`, or `text` types
-		- **`<`** (less than): allows you to compare two `int`, `float`, or `text` types
-		- **`<=`** (less than or equal to): allows you to compare two `int`, `float`, or `text` types
-		- **`>=`** (greater than or equal to): allows you to compare two `int`, `float`, or `text` types
+		A typed function:
+		```
+		function add(x int, y int) int:
+			return x + y
+		end
 
-		## Built-in Functions
-		- **`len()`**: returns an `int` that is the number of characters in a `text` value, the number of elements in an `array` value, or the number of elements in a `map` value
-		- **`append()`**: returns the array with the new element(s) added to the back. This works in-place and does not allocate a new `array`
+		var value int = add(10, 20)
+		```
 
-		Examples:
+		## Parameter Types
+		A function can have a mix of typed parameters and untyped parameters:
 
 		```
-		10 > 8 // returns true
-		10 < 8 // returns false
-		10 >= 10 // returns true
-		10 <= 9 // returns false
-		10 + 2 // returns 12
-		10 - 2 returns 8
-		10 / 5 // returns 2
-		10 * 5 // returns 50
-		"hello" + " world" // returns "hello world"
-		len("hello world") // returns 11
-		len([]text{"a", "b", "c"}) // returns 3
-		len({ name: "hookscript" }) // returns 1
-		append([]text{"a", "b", "c"}, "d", "e", "f") // returns []text["a", "b", "c", "d", "e", "f"]
-		!true // returns false
-		-(10 * 2) // returns -20
+		function add(x float, y)
+		```
+
+		If successive parameters have the same type you only need to declare the type for the last parameter:
+
+		```
+		function add(x float, y float)
+		function add(x, y float) // simplified version of the above function signature
+		```
+
+		To avoid successive parameters inheriting the type of the last parameter, you can use the **`any`** keyword to explicitly
+		set the parameter types
+
+		```
+		function add(x any, y float)
+		``` 
+
+		## Rest Parameter
+		A function's last parameter can be a *rest* parameter, allowing you to pass as many arguments to the function as you want. The
+		parameter becomes a list when working inside the function's body
+
+		```
+		function add(n ...) // n is a list of "any" type
+		function add(n ...any) // same as above, but more explicitly
+		function add(n ...int) // n is a list of "int" type
+		```
+
+		```
+		function add(myNumbers ...int) int:
+			var total = 0
+			var i = 0
+			for i < len(myNumbers):
+				total = total + myNumbers[i]
+				i = i + 1
+			end
+			return total
+		end
+
+		var sum = add(10, 20, 30, 40, 50)
 		```
 	</div>
 
@@ -64,22 +85,35 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 </InstructionsWrapper>
 
-<CodeWrapper initialCode={`GRAPH {	
-	INPUT MDE(): sA<Name text, Age int> {
-		CONFIG {
-			let nameColumn []text = ["PJ", "Cleo"]
-			let ageColumn []int = [5, 8]
-			let c map = {
-				Data map: {
-					Name []text: nameColumn,
-					Age []int: ageColumn
-				}
-			}
-			return c
-		}
-	}
+<CodeWrapper initialCode={`// an untyped function
+function concatenate(a, b):
+	return a + b
+end
 
-	OUTPUT DATASET(sA): out<Name text, Age int> {}
-}
+var name = concatenate("HookScript ", "with dynamic typing")
+print(name)
+
+// a typed function
+function concat(a, b text) text:
+	return a + b
+end
+
+name = concat("HookScript ", "with static typing")
+print(name)
+
+
+// using a rest parameter
+function add(myNumbers ...int) int:
+	var total = 0
+	var i = 0
+	for i < len(myNumbers):
+		total = total + myNumbers[i]
+		i = i + 1
+	end
+	return total
+end
+
+var sum = add(10, 20, 30, 40, 50)
+print(sum)
 `}>
 </CodeWrapper>
