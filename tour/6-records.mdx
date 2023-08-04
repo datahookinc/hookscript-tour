@@ -1,0 +1,72 @@
+---
+title: "RECORD"
+slug: "6"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# RECORDS
+
+		In HookScript, `records` are a static container type that allow you to store multiple values as field-value pairs. To create a record, you 
+		first specify your record type and then assign its values using a `list` or `dict`. Unlike a `dict`, a `record` can only have values for the
+		fields you specify.
+
+		```
+		var x record<name, age> = ["name", 7]
+		print(len(x)) // returns 2
+
+		var x record<name, age> = { name: "pj", age: 7}
+		print(len(x)) // returns 2
+		```
+
+		## Retrieving Values by Index
+		To retrive a value from a record, use square brackets with the key name (e.g., `x["name"]`). A `null` value is returned if the field
+		is not in the record.
+
+		```
+		x["name"] // returns "pj"
+		```
+		
+		## Assigning Values by Index
+		To assign a value to a record, use square brackets with the key name (e.g., `x["name"]`). If the field does not exist on the record, an `invalid field`
+		error will be thrown
+
+		```
+		x["name"] = "cleo"
+		```
+	
+		## Record Types
+		Records can hold any type, including other records. You must specify at least one field name.
+		
+		To assign fields to a record, place the field between `<` and `>` characters:
+		
+		```
+		var x record<name> // the record has one field called `name` that is an `any` type
+		var x record<name text> /// the record has one field called `name` that is a `text` type
+		var x record<name text, age int> // the record has two fields called `name` and `age` of types `text` and `int` respectively
+		var x dict<name, description text> // the record has two fields called `name` and `description` that are both `text` types
+		```
+
+		When your record contains other record, you use multiple indexes to retrieve and assign values:
+
+		```
+		var x record<cat record<name text>> = { cat: ["pj"]}
+		x["cat"]["name"] // returns "pj"
+		```
+	</div>
+
+	<Navigation back="/tour/5" forward="/tour/7" index="6" />
+
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`var x record<name, age> = ["name", 7]
+print(len(x)) // returns 2
+
+var y record<name text, age int> = { name: "pj", age: 7 }
+print(len(y)) // returns 2
+`}>
+</CodeWrapper>

@@ -1,6 +1,6 @@
 ---
 title: "FUNCTIONS"
-slug: "7"
+slug: "9"
 ---
 
 import { InstructionsWrapper } from './instructions.tsx'
@@ -62,7 +62,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 		```
 		function add(n ...) // n is a list of "any" type
-		function add(n ...any) // same as above, but more explicitly
+		function add(n ...any) // same as above, but more explicit
 		function add(n ...int) // n is a list of "int" type
 		```
 
@@ -71,8 +71,8 @@ import { Navigation } from '../src/components/navigation.tsx'
 			var total = 0
 			var i = 0
 			for i < len(myNumbers):
-				total = total + myNumbers[i]
-				i = i + 1
+				total += myNumbers[i]
+				i++
 			end
 			return total
 		end
@@ -81,7 +81,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 		```
 	</div>
 
-	<Navigation back="/tour/6" index="7" />
+	<Navigation back="/tour/8" index="9" />
 
 </InstructionsWrapper>
 
@@ -107,8 +107,8 @@ function add(myNumbers ...int) int:
 	var total = 0
 	var i = 0
 	for i < len(myNumbers):
-		total = total + myNumbers[i]
-		i = i + 1
+		total += myNumbers[i]
+		i++
 	end
 	return total
 end

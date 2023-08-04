@@ -1,0 +1,74 @@
+---
+title: "DICT"
+slug: "5"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# DICTS
+
+		In HookScript, `dicts` are a dynamic container type that allow you to store multiple values as key-value pairs. To create a dict,
+		you place your comma separated key-value pairs between curly brackets `{ key: value, key: value, key: value }`:
+
+		```
+		var x dict = { name: "pj", age: 7}
+		print(len(x)) // returns 2
+		```
+
+		## Retrieving Values by Index
+		To retrive a value from a dict, use square brackets with the key name (e.g., `x["name"]`). A `null` value is returned if the key
+		is not in the dictionary.
+
+		```
+		x["name"] // returns "pj"
+		```
+		
+		## Assigning Values by Index
+		To assign a value to a dict, use square brackets with the key name (e.g., `x["name"]`). If the key does not already exist in the dictionary
+		it will be created.
+
+		```
+		x["name"] = "cleo"
+		```
+	
+		## Dict Types
+		Dicts can hold any type, including other dicts. You can specify that certain keys must exist in the dictionary and that they must
+		have a specific type.
+		
+		To assign a type to a dict, place the type between `<` and `>` characters:
+		
+		```
+		var x dict<name> // the assigned dict must have a key called `name`, which accepts any value
+		var x dict<name text> // the assigned dict must have a key called `name` and its type must be `text`
+		var x dict<name text, age?> // the assigned dict has an optional key called `age`, which accepts any value
+		var x dict<name text, age int?> // the assigned dict has an optional key called `age` and its type must be `int`
+		```
+
+		When your dict contains other dicts, you use multiple indexes to retrieve and assign values:
+
+		```
+		var x = { "is a cool cat": true }
+		x["is a cool cat"] // returns true
+		```
+	</div>
+
+	<Navigation back="/tour/4" forward="/tour/6" index="5" />
+
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`var x = { name: "pj" }
+print(x["name"])
+
+var y dict<name text, age int> = {
+	name: "pj",
+	age: 7,
+	description: "cool cat"
+}
+
+print(y["description"])
+`}>
+</CodeWrapper>

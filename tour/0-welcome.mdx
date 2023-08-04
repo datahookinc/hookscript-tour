@@ -15,14 +15,33 @@ import Button from '@mui/material/Button';
 		HookScript is a programming language designed to make data more accessible and easier to share. You can use HookScript to connect
 		to data sources, perform transformations, and produce an output dataset that you can share with others.
 
+		# READY TO GET HOOKED?
+
+		<Link to="/tour/1" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+			<Button
+				style={{
+					fontSize: "1.4rem",
+					backgroundColor: "var(--blue-accent)",
+					color: "white",
+					
+				}}
+				text="something"
+			>
+				<span>Take the Tour</span>
+			</Button>
+		</Link>
+
+		<br />
+		<br />
+
 		### KEY CONCEPTS
 
 		- HookScript is an interpreted language, with gradual typing
 		- For this tour, HookScript was compiled to WebAssembly (WASM) so it will run entirely in your browser (no downloads, no server calls)
 		- HookScript provides syntax and conventions to make transforming data easier and more enjoyable
 		- Semicolons are optional when ending a statement or expression
-		- The language is in active development, so it is missing some core language features (dicts/maps, arrow functions, datetime types, locks/immutability, user-defined types, etc.)
-		- The language is starting to incorporate domain specific constructs for data manipulation (e.g., pipelines, table/column/row types, etc.)
+		- The language is in active development, so it is missing some core language features (arrow functions, datetime types, locks/immutability, user-defined types, etc.)
+		- The language is starting to incorporate domain specific constructs for data manipulation (e.g., streams, table/records types, etc.)
 		- You can click the "Run Code" button to run your code, or use `Shift + Enter` as a keyboard shortcut
 
 		### WHERE TO USE THE LANGUAGE
@@ -39,24 +58,6 @@ import Button from '@mui/material/Button';
 		- How to make the language easier to work with for people who are new to programming (e.g., how to simplify the syntax, how to make some concepts easier to understand, etc.)
 		- What language features would support data manipulation/transformations (e.g., pipelines, table/column/row types, filtering, sorting, etc.)
 		- Any bugs/issues you encounter when working with the language during this tour
-
-		<br />
-		<br />
-		# READY TO GET HOOKED?
-
-		<Link to="/tour/1" style={{ color: 'inherit', textDecoration: 'inherit' }}>
-			<Button
-				style={{
-					fontSize: "1.4rem",
-					backgroundColor: "var(--blue-accent)",
-					color: "white",
-					
-				}}
-				text="something"
-			>
-				<span>Get Started</span>
-			</Button>
-		</Link>
 	</div>
 
 </InstructionsWrapper>

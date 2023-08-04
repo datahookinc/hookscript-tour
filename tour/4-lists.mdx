@@ -28,7 +28,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 		```
 		
 		## Assigning Values by Index
-		To assign a value to a list, use square brackets with the inded of the element (e.g., `[0]`). An error is thrown if the
+		To assign a value to a list, use square brackets with the index of the element (e.g., `[0]`). An error is thrown if the
 		index is out of rnage. Indexes start at 0
 
 		```
@@ -39,11 +39,12 @@ import { Navigation } from '../src/components/navigation.tsx'
 		Lists can hold any type, including other lists. To assign a type to a list, place the type between `<` and `>` characters:
 		
 		```
+		var x = [1, "hello", true, 3.14]
 		var x list = [1, "hello", true, 3.14]
 		var x list<int> = [1, 2, 3]
 		var x list<float> = [1.1, 2.2, 3.3]
 		var x list<bool> = [true, true, false]
-		var x list<list<int>> = [ [1, 2, 3], [4, 5, 6 ]]
+		var x list<list<int>> = [ [1, 2, 3], [4, 5, 6 ] ]
 		```
 
 		When your list contains other lists, you use multiple indexes to retrieve and assign values:
@@ -59,10 +60,10 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 </InstructionsWrapper>
 
-<CodeWrapper initialCode={`var x list = [1, "hello", true]
+<CodeWrapper initialCode={`var x = [1, "hello", true]
 print(x[1])
 
-var y list<list<int>> = [ [1, 2, 3], [4, 5, 6]]
+var y list<list<int>> = [ [1, 2, 3], [4, 5, 6] ]
 print(y[1][2])
 `}>
 </CodeWrapper>

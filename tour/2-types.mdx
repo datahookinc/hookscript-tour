@@ -25,14 +25,18 @@ import { Navigation } from '../src/components/navigation.tsx'
 		
 		## Container types
 		- `list` - a list of values
+		- `dict` - a dynamic collection of key-value pairs
+		- `record` - a static collection of key-value pairs
 
 		```
-var a int = 0
-var b float = 1.0
-var c text = "Hello"
-var d bool = true
-var e list = [1, 2, 3]
-var f any = 1
+var i int = 0
+var b bool = true
+var t text = "Hello"
+var f float = 1.0
+var l list = [1, 2, 3]
+var d dict = { name: "pj", age: 7}
+var r record<name, age> = ["pj", 7]
+var a any = 1
 		```
 
 		## `any` type
@@ -66,13 +70,15 @@ var f any = 1
 
 </InstructionsWrapper>
 
-<CodeWrapper initialCode={`var a int = 0
-var b float = 1.0
-var c text = "Hello"
-var d bool = true
-var e list = [1, 2, 3]
-var f any = 1
+<CodeWrapper initialCode={`var i int = 0
+var b bool = true
+var t text = "Hello"
+var f float = 1.0
+var l list = [1, 2, 3]
+var d dict = { name: "pj", age: 7}
+var r record<name, age> = ["pj", 7]
+var a any = 1
 
-print(a, b, c, d, e, f)
+print(i, b, t, f, l, d, r, a)
 `}>
 </CodeWrapper>
