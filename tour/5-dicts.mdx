@@ -19,8 +19,15 @@ import { Navigation } from '../src/components/navigation.tsx'
 		print(len(x)) // returns 2
 		```
 
+		When your key contains spaces, you place the key in quotes:
+
+		```
+		var x = { "is a cool cat": true }
+		x["is a cool cat"] // returns true
+		```
+
 		## Retrieving Values by Index
-		To retrive a value from a dict, use square brackets with the key name (e.g., `x["name"]`). A `null` value is returned if the key
+		To retrieve a value from a dict, use square brackets with the key name (e.g., `x["name"]`). A `null` value is returned if the key
 		is not in the dictionary.
 
 		```
@@ -28,7 +35,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 		```
 		
 		## Assigning Values by Index
-		To assign a value to a dict, use square brackets with the key name (e.g., `x["name"]`). If the key does not already exist in the dictionary
+		To assign a value to a dict, use square brackets with the key name in quotes (e.g., `x["name"]`). If the key does not already exist in the dictionary
 		it will be created.
 
 		```
@@ -51,8 +58,8 @@ import { Navigation } from '../src/components/navigation.tsx'
 		When your dict contains other dicts, you use multiple indexes to retrieve and assign values:
 
 		```
-		var x = { "is a cool cat": true }
-		x["is a cool cat"] // returns true
+		var x = { cats: { name: "pj" } }
+		x["cats"]["pj"] // "pj""
 		```
 	</div>
 

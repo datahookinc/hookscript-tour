@@ -23,16 +23,23 @@ import { Navigation } from '../src/components/navigation.tsx'
 		print(len(x)) // returns 2
 		```
 
-		## Retrieving Values by Index
-		To retrive a value from a record, use square brackets with the key name (e.g., `x["name"]`). A `null` value is returned if the field
-		is not in the record.
+		When your field name contains spaces, you place the field name in quotes:
 
+		```
+		var x record<"is cool cat", age> = [true, 7]
+		x["is a cool cat"] // returns true
+		```
+
+		## Retrieving Values by Index
+		To retrieve a value from a record, use square brackets with the field name in quotes (e.g., `x["name"]`). A `null` value is returned if the field
+		is not in the record.
+s
 		```
 		x["name"] // returns "pj"
 		```
 		
 		## Assigning Values by Index
-		To assign a value to a record, use square brackets with the key name (e.g., `x["name"]`). If the field does not exist on the record, an `invalid field`
+		To assign a value to a record, use square brackets with the field name in quotes (e.g., `x["name"]`). If the field does not exist on the record, an `invalid field`
 		error will be thrown
 
 		```
@@ -42,7 +49,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 		## Record Types
 		Records can hold any type, including other records. You must specify at least one field name.
 		
-		To assign fields to a record, place the field between `<` and `>` characters:
+		To assign fields to a record, place the field names between `<` and `>` characters with their types:
 		
 		```
 		var x record<name> // the record has one field called `name` that is an `any` type
@@ -51,7 +58,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 		var x dict<name, description text> // the record has two fields called `name` and `description` that are both `text` types
 		```
 
-		When your record contains other record, you use multiple indexes to retrieve and assign values:
+		When your record contains other records, you use multiple indexes to retrieve and assign values:
 
 		```
 		var x record<cat record<name text>> = { cat: ["pj"]}
