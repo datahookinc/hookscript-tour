@@ -566,6 +566,8 @@ globalThis.go = new Go();
 WebAssembly.instantiateStreaming(fetch('../../hookscript.wasm'), go.importObject).then(result => {
 	// create a custom event that our component can listen to
 	const event = new Event("dh-ready");
+	console.log('dispatching event');
 	globalThis.dispatchEvent(event);
+	console.log('event has been dispatched');
 	globalThis.go.run(result.instance); // start listening for scripts to be sent
 });

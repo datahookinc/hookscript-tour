@@ -264,6 +264,7 @@ export function CodeWrapper({ initialCode }: Props) {
     useEffect(() =>{
 
         function handleDHReadyEvent() {
+            console.log("component has received dh-ready");
             setIsLoading(false);
         }
 
