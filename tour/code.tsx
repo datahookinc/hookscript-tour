@@ -361,7 +361,6 @@ export function CodeWrapper({ initialCode }: Props) {
                 <StyledLoading>
                     <CircularProgress color="inherit"/>
                     <p>Loading Playground</p>
-                    <p>{Date.now()}</p>
                 </StyledLoading>
 
                 :
