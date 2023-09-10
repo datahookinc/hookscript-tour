@@ -42,7 +42,6 @@ export default function SEO({ title }: Props) {
             />
             <meta property="og:description" content={data.site.siteMetadata.description} key="ogdesc" />
             <meta name="robots" content="index, follow" />
-            <script src="../../wasm_exec.js" />
         </>
     )
 }

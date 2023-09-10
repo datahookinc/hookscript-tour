@@ -2,6 +2,7 @@ import React, { Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState 
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import styled from 'styled-components';
+import { useCompiler } from './hooks/useCompiler';
 
 const StyledCode = styled.section`
     width: 50%;
@@ -182,7 +183,7 @@ export function CodeWrapper({ initialCode }: Props) {
     const [error, setError] = useState<null | string>(null);
     // const [results, setResults] = useState<Results | null>(null);
     const [results, setResults] = useState<String | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const isReady = useCompiler();
     const history = useRef<string[]>([]);
 
     useLayoutEffect(() => {
@@ -258,22 +259,6 @@ export function CodeWrapper({ initialCode }: Props) {
             }
         }
     }, []);
-
-
-    // Notifies the component that the compiler is now ready
-    useEffect(() =>{
-
-        // The event is being dispatched, but is not being picked-up here; is it dispatching it before the component has mounted?
-        function handleDHReadyEvent() {
-            console.log("component has received dh-ready");
-            setIsLoading(false);
-        }
-
-        window.addEventListener('dh-ready', handleDHReadyEvent);
-        return () => {
-            window.removeEventListener('dh-ready', handleDHReadyEvent)
-        }
-    }, [])
 
     // centralized location to enable history
     const handleSetCode = (code: string) => {
@@ -370,7 +355,7 @@ export function CodeWrapper({ initialCode }: Props) {
 
     return (
         <StyledCode ref={parentContainer}>
-            { isLoading
+            { !isReady
             
                 ? 
                 <StyledLoading>
