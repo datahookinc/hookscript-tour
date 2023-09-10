@@ -263,6 +263,7 @@ export function CodeWrapper({ initialCode }: Props) {
     // Notifies the component that the compiler is now ready
     useEffect(() =>{
 
+        // The event is being dispatched, but is not being picked-up here; is it dispatching it before the component has mounted?
         function handleDHReadyEvent() {
             console.log("component has received dh-ready");
             setIsLoading(false);
@@ -375,6 +376,7 @@ export function CodeWrapper({ initialCode }: Props) {
                 <StyledLoading>
                     <CircularProgress color="inherit"/>
                     <p>Loading Playground</p>
+                    <p>{Date.now()}</p>
                 </StyledLoading>
 
                 :

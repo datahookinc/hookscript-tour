@@ -569,5 +569,6 @@ WebAssembly.instantiateStreaming(fetch('../../hookscript.wasm'), go.importObject
 	console.log('dispatching event');
 	globalThis.dispatchEvent(event);
 	console.log('event has been dispatched');
+	console.log(Date.now());
 	globalThis.go.run(result.instance); // start listening for scripts to be sent
 });
