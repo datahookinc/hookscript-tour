@@ -158,6 +158,7 @@ const StyledLoading = styled.div`
     flex: 1;
     background-color: var(--dark-purple);
     color: #f0f1f2;
+    flex-direction: column;
 `;
 
 type Props = {
@@ -369,7 +370,11 @@ export function CodeWrapper({ initialCode }: Props) {
         <StyledCode ref={parentContainer}>
             { isLoading
             
-                ? <StyledLoading><CircularProgress color="inherit"/></StyledLoading>
+                ? 
+                <StyledLoading>
+                    <CircularProgress color="inherit"/>
+                    <p>Loading Playground</p>
+                </StyledLoading>
 
                 :
             <>
