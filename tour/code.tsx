@@ -1,5 +1,6 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import styled from 'styled-components';
 
 const StyledCode = styled.section`
@@ -149,6 +150,16 @@ const StyledCode = styled.section`
 
 `;
 
+const StyledLoading = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex: 1;
+    background-color: var(--dark-purple);
+    color: #f0f1f2;
+`;
+
 type Props = {
     initialCode: string;
 }
@@ -170,6 +181,7 @@ export function CodeWrapper({ initialCode }: Props) {
     const [error, setError] = useState<null | string>(null);
     // const [results, setResults] = useState<Results | null>(null);
     const [results, setResults] = useState<String | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
     const history = useRef<string[]>([]);
 
     useLayoutEffect(() => {
@@ -218,7 +230,7 @@ export function CodeWrapper({ initialCode }: Props) {
             }
         }
 
-        // Note: we don't pass the entries because we already have a global reference to thte text area
+        // Note: we don't pass the entries because we already have a global reference to the text area
         function handleResize() {
             handleSetLineNums();
         }
@@ -245,6 +257,20 @@ export function CodeWrapper({ initialCode }: Props) {
             }
         }
     }, []);
+
+
+    // Notifies the component that the compiler is now ready
+    useEffect(() =>{
+
+        function handleDHReadyEvent() {
+            setIsLoading(false);
+        }
+
+        window.addEventListener('dh-ready', handleDHReadyEvent);
+        return () => {
+            window.removeEventListener('dh-ready', handleDHReadyEvent)
+        }
+    }, [])
 
     // centralized location to enable history
     const handleSetCode = (code: string) => {
@@ -339,97 +365,78 @@ export function CodeWrapper({ initialCode }: Props) {
         history.current = [];
     }
 
-    // let resultsTable: React.ReactNode;
-    // if (results) {
-    //     if (results.data.length === 0) {
-    //         resultsTable = <div>Script did not return any records</div>;
-    //     } else {
-    //         resultsTable =
-    //         <table>
-    //             <thead>
-    //                 <tr>
-    //                     {results.attributes.map(colName => 
-    //                         <th key={`head-${colName}`}>
-    //                             {colName}
-    //                         </th>
-    //                     )}
-    //                 </tr>
-    //             </thead>
-    //             <tbody>
-    //                 {results.data.map((row, i) => 
-    //                     <tr key={`row-${i}`}>
-    //                         {row.map((cell, j) => <td key={`row-${i}-cell-${j}`}>{cell.toString()}</td>)}
-    //                     </tr>    
-    //                 )}
-    //             </tbody>
-    //         </table>
-    //     }
-    // }
-
     return (
         <StyledCode ref={parentContainer}>
-            <div className="code-container">
-                <div className="line-numbers" ref={lineArea}>
-                    {lines.map((_, i) => <span key={i}></span>)}
+            { isLoading
+            
+                ? <StyledLoading><CircularProgress color="inherit"/></StyledLoading>
+
+                :
+            <>
+                <div className="code-container">
+                    <div className="line-numbers" ref={lineArea}>
+                        {lines.map((_, i) => <span key={i}></span>)}
+                    </div>
+                    <textarea
+                        className="text-area"
+                        value={editorCode}
+                        onChange={handleChangeCode}
+                        onKeyDown={handleKeyDown}
+                        autoCapitalize="off"
+                        autoComplete="off"
+                        autoCorrect="off"
+                        wrap="off"
+                        ref={textArea}
+                        onScroll={handleScrollTextArea}
+                    />
                 </div>
-                <textarea
-                    className="text-area"
-                    value={editorCode}
-                    onChange={handleChangeCode}
-                    onKeyDown={handleKeyDown}
-                    autoCapitalize="off"
-                    autoComplete="off"
-                    autoCorrect="off"
-                    wrap="off"
-                    ref={textArea}
-                    onScroll={handleScrollTextArea}
-                />
-            </div>
-            <div
-                className="output-container"
-                ref={outputContainer}
-                >
                 <div
-                    className="charged-bar"
-                    onMouseDown={handleDragOutputBar}
-                >
-                </div>
-                <div className="content">
-                    <div className="toolbar">
-                        <Button
-                            variant="text"
-                            style={{
-                                fontSize: "1.4rem",
-                                marginRight: "6px",
-                                color: "var(--purple)",
-                            }}
-                            onClick={handleReset}
-                        >
-                            Reset Editor
-                        </Button>
-                        <Button
-                            style={{
-                                fontSize: "1.4rem",
-                                backgroundColor: "var(--blue-accent)",
-                                color: "white",
-                            }}
-                            onClick={handleRun}
-                            title="Run this code [shift-enter]"
-                        >
-                            Run Code
-                        </Button>
+                    className="output-container"
+                    ref={outputContainer}
+                    >
+                    <div
+                        className="charged-bar"
+                        onMouseDown={handleDragOutputBar}
+                    >
                     </div>
-                    <div className="results">
-                        { error 
-                        ?
-                            <span>{error}</span>
-                        :
-                            // resultsTable
-                            <code>{results}</code>
-                        }
+                    <div className="content">
+                        <div className="toolbar">
+                            <Button
+                                variant="text"
+                                style={{
+                                    fontSize: "1.4rem",
+                                    marginRight: "6px",
+                                    color: "var(--purple)",
+                                }}
+                                onClick={handleReset}
+                            >
+                                Reset Editor
+                            </Button>
+                            <Button
+                                style={{
+                                    fontSize: "1.4rem",
+                                    backgroundColor: "var(--blue-accent)",
+                                    color: "white",
+                                }}
+                                onClick={handleRun}
+                                title="Run this code [shift-enter]"
+                            >
+                                Run Code
+                            </Button>
+                        </div>
+                        <div className="results">
+                            { error 
+                            ?
+                                <span>{error}</span>
+                            :
+                                // resultsTable
+                                <code>{results}</code>
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
+            </>
+            }
             <div
                 className="charged-resize-bar"
                 onMouseDown={handleDragFlexBar}
