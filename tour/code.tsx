@@ -28,6 +28,21 @@ const StyledCode = styled.section`
         left: -6px;
         height: 100%;
         cursor: col-resize;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .handle {
+            height: 32px;
+            width: 8px;
+            position: relative;
+            position: fixed;
+            border-radius: 2px;
+            background-color: var(--purple-gray);
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+        }
+
     }
 
     .charged-resize-bar::before {
@@ -101,6 +116,20 @@ const StyledCode = styled.section`
             top: -6px;
             width: 100%;
             cursor: row-resize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .handle {
+                height: 8px;
+                width: 32px;
+                position: relative;
+                position: fixed;
+                border-radius: 2px;
+                background-color: var(--purple-gray);
+                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+            }
+
         }
 
         .charged-bar::before {
@@ -111,6 +140,8 @@ const StyledCode = styled.section`
             display: block;
         }
 
+        // LEFT-OFF: vertical bar should not be usable on mobile; handle disappears on horizontal bar
+        
         .content {
             flex: 1 1;
             background-color: var(--context-background);
@@ -390,6 +421,7 @@ export function CodeWrapper({ initialCode }: Props) {
                         className="charged-bar"
                         onMouseDown={handleDragOutputBar}
                     >
+                        <div className="handle"></div>
                     </div>
                     <div className="content">
                         <div className="toolbar">
@@ -433,6 +465,7 @@ export function CodeWrapper({ initialCode }: Props) {
                 className="charged-resize-bar"
                 onMouseDown={handleDragFlexBar}
             >
+                <div className="handle"></div>
             </div>
         </StyledCode>
     )

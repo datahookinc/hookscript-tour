@@ -18,6 +18,7 @@ const StyledInstructions = styled.section`
         .instructions-main {
             flex: 1;
             overflow: auto;
+            padding-right: 10px;
         }
 
         @media only screen and (max-width: 600px) {
