@@ -64,6 +64,18 @@ var a any = 1
 		```
 
 		**Note:** an **`int`** type is automatically cast to a **`float`** type wherever a **`float`** is expected
+
+		## Named types
+
+		HookScript allows you to create your own types, called `named types` using the `type` keyword similar to how you would declare a variable. This allows
+		you to encapsulate logic for us throughout your script. Named types can be used like any other type and comparisons are made by name and by the underlying
+		type.
+
+		```
+		type cat = record<name text, age int>
+		var pj cat = ["PJ", 7]
+		print(pj["name"])
+		```
 	</div>
 
 	<Navigation back="/tour/1" forward="/tour/3" index="2" />
@@ -79,6 +91,9 @@ var d dict = { name: "pj", age: 7}
 var r record<name, age> = ["pj", 7]
 var a any = 1
 
-print(i, b, t, f, l, d, r, a)
+type cat = record<name text, age int>
+var pj cat = ["PJ", 7]
+
+print(i, b, t, f, l, d, r, a, pj)
 `}>
 </CodeWrapper>

@@ -41,6 +41,8 @@ const StyledCode = styled.section`
             border-radius: 2px;
             background-color: var(--purple-gray);
             box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+            background-image: linear-gradient(45deg, #b2b7d1 25%, #202224 25%, #202224 50%, #b2b7d1 50%, #b2b7d1 75%, #202224 75%, #202224 100%);
+            background-size: 2px 2px;
         }
 
     }
@@ -128,6 +130,8 @@ const StyledCode = styled.section`
                 border-radius: 2px;
                 background-color: var(--purple-gray);
                 box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+                background-image: linear-gradient(45deg, #b2b7d1 25%, #202224 25%, #202224 50%, #b2b7d1 50%, #b2b7d1 75%, #202224 75%, #202224 100%);
+                background-size: 2px 2px;
             }
 
         }

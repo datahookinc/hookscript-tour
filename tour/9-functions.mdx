@@ -11,42 +11,69 @@ import { Navigation } from '../src/components/navigation.tsx'
 	<div className="instructions-main">
 		# FUNCTIONS
 
-		In HookScript, functions are a way to create reusable code. A function starts with the **`function`** keyword, followed by the function
+		In HookScript, functions are a way to create reusable code. A function starts with the **`func`** keyword, followed by the function
 		name, then any parameters, its return type and a colon ( `:` ) to indicate the start of the function's body. Functions are terminated with the
 		**`end`** keyword and use the **`return`** keyword to specify the value to return.
 
-		## Function Statement
+		## Named Function Statement
 		
-		An untyped function:
+		A function without types:
 		```
-		function add(x, y):
+		func add(x, y):
 			return x + y
 		end
 
 		var value = add(10, 20)
 		```
 
-		A typed function:
+		A function with types:
 		```
-		function add(x int, y int) int:
+		func add(x int, y int) int:
 			return x + y
 		end
 
 		var value int = add(10, 20)
 		```
 
+		## Anonymous Functions
+		Functions are first class citizens in HookScript, allowing you to assign them to variables. An `anonymous function` is a convenient way to declare a function as an expression without specifying a name.
+		To declare an anonymous function, simply omit the function's name.
+
+		```
+		var fn = func(x, y int): return x + y end
+		print(fn(10, 20))
+		```
+
+		## Typed Functions (e.g., methods)
+		When declaring a named type you can attach a `typed function` that allows you to specify functionality only available to that type. This is analogous to methods in other programming languages. To declare
+		a typed function, use a regular named function statement (see above), but attach the named type and an alias to the `func` keyword.
+
+		```
+		type cat = record<name text, age int>
+
+		func<c cat> meow():
+			return "Meow, my name is " + c["name"]
+		end
+
+		var pj cat = ["PJ", 7]
+		print(pj.meow()) // prints "Meow, my name is PJ"
+		```
+
+		In the example above, we follow the `func` keyword with `<c cat>` indicating that we would like to attach the function to the `cat` type and refer to the value as `c`. In other programming languages, you
+		might might use `this` or `self` in place of `c` to refer to the value.
+
 		## Parameter Types
 		A function can have a mix of typed parameters and untyped parameters:
 
 		```
-		function add(x float, y)
+		func add(x float, y)
 		```
 
 		If successive parameters have the same type you only need to declare the type for the last parameter:
 
 		```
-		function add(x float, y float)
-		function add(x, y float) // simplified version of the above function signature
+		func add(x float, y float)
+		func add(x, y float) // simplified version of the above function signature
 		```
 
 		To avoid successive parameters inheriting the type of the last parameter, you can use the **`any`** keyword to explicitly
@@ -61,13 +88,13 @@ import { Navigation } from '../src/components/navigation.tsx'
 		parameter becomes a list when working inside the function's body
 
 		```
-		function add(n ...) // n is a list of "any" type
-		function add(n ...any) // same as above, but more explicit
-		function add(n ...int) // n is a list of "int" type
+		func add(n ...) // n is a list of "any" type
+		func add(n ...any) // same as above, but more explicit
+		func add(n ...int) // n is a list of "int" type
 		```
 
 		```
-		function add(myNumbers ...int) int:
+		func add(myNumbers ...int) int:
 			var total = 0
 			var i = 0
 			for i < len(myNumbers):
@@ -79,6 +106,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 		var sum = add(10, 20, 30, 40, 50)
 		```
+
 	</div>
 
 	<Navigation back="/tour/8" index="9" />
@@ -86,7 +114,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 </InstructionsWrapper>
 
 <CodeWrapper initialCode={`// an untyped function
-function concatenate(a, b):
+func concatenate(a, b):
 	return a + b
 end
 
@@ -94,7 +122,7 @@ var name = concatenate("HookScript ", "with dynamic typing")
 print(name)
 
 // a typed function
-function concat(a, b text) text:
+func concat(a, b text) text:
 	return a + b
 end
 
@@ -103,7 +131,7 @@ print(name)
 
 
 // using a rest parameter
-function add(myNumbers ...int) int:
+func add(myNumbers ...int) int:
 	var total = 0
 	var i = 0
 	for i < len(myNumbers):
@@ -115,5 +143,14 @@ end
 
 var sum = add(10, 20, 30, 40, 50)
 print(sum)
+
+// typed function
+type cat = record<name text, age int>
+func<c cat> meow():
+	return "Meow, my name is " + c["name"]
+end
+
+var pj cat = ["PJ", 7]
+print(pj.meow()) // prints "Meow, my name is PJ"
 `}>
 </CodeWrapper>

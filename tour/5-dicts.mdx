@@ -26,7 +26,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 		x["is a cool cat"] // returns true
 		```
 
-		## Retrieving Values by Index
+		## Retrieving Values by key
 		To retrieve a value from a dict, use square brackets with the key name (e.g., `x["name"]`). A `null` value is returned if the key
 		is not in the dictionary.
 
@@ -34,12 +34,20 @@ import { Navigation } from '../src/components/navigation.tsx'
 		x["name"] // returns "pj"
 		```
 		
-		## Assigning Values by Index
+		## Assigning Values by key
 		To assign a value to a dict, use square brackets with the key name in quotes (e.g., `x["name"]`). If the key does not already exist in the dictionary
 		it will be created.
 
 		```
 		x["name"] = "cleo"
+		```
+
+		## Check if dict contains a key
+		To check if a dict contains a key, use the `in` operator which will return `true` or `false`.
+
+		```
+		var myDict = { name: "PJ", age: 7 }
+		"name" in myDict // returns true
 		```
 	
 		## Dict Types
@@ -77,5 +85,8 @@ var y dict<name text, age int> = {
 }
 
 print(y["description"])
+
+var myDict = { name: "PJ", age: 7 }
+print("name" in myDict) // returns true
 `}>
 </CodeWrapper>

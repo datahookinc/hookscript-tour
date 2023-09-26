@@ -21,10 +21,12 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 		## Retrieving Values by Index
 		To retrieve a value from a list, use square brackets with the index of the element (e.g., `[0]`). An error is thrown
-		if the index is out of range. Indexes start at 0.
+		if the index is out of range. Indexes are zero-based (e.g., `[0]` references the first element in your list) and can be
+		negative (e.g., `[-1]` references the last index in your list)
 
 		```
-		list[2] // returns 1
+		list[0] // returns 1
+		list[-1] // returns 3
 		```
 		
 		## Assigning Values by Index
@@ -33,6 +35,14 @@ import { Navigation } from '../src/components/navigation.tsx'
 
 		```
 		list[0] = 10
+		```
+
+		## Checking if list contains a value
+		To check if a list contains a value, use the `in` operator which will return `true` or `false`.
+
+		```
+		var myList list = [10, 20, 30]
+		30 in myList // returns true
 		```
 	
 		## List Types
@@ -65,5 +75,8 @@ print(x[1])
 
 var y list<list<int>> = [ [1, 2, 3], [4, 5, 6] ]
 print(y[1][2])
+
+var myList list = [10, 20, 30]
+print(30 in myList) // returns true
 `}>
 </CodeWrapper>

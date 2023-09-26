@@ -30,20 +30,30 @@ import { Navigation } from '../src/components/navigation.tsx'
 		x["is a cool cat"] // returns true
 		```
 
-		## Retrieving Values by Index
+		## Retrieving Values by field
 		To retrieve a value from a record, use square brackets with the field name in quotes (e.g., `x["name"]`). A `null` value is returned if the field
 		is not in the record.
-s
+
 		```
 		x["name"] // returns "pj"
 		```
 		
-		## Assigning Values by Index
+		## Assigning Values by field
 		To assign a value to a record, use square brackets with the field name in quotes (e.g., `x["name"]`). If the field does not exist on the record, an `invalid field`
 		error will be thrown
 
 		```
 		x["name"] = "cleo"
+		```
+
+		## Retrieving field value by index
+		Records allow you to retrieve values based on their field index. Indexes are zero-based (e.g., `[0]` references the first field in your record) and can be
+		negative (e.g., `[-1]` references the last field in your record)
+
+		```
+		var x record<name, age> = ["PJ", 7]
+		x[0] // returns "PJ"
+		x[-1] // returns 7
 		```
 	
 		## Record Types
@@ -75,5 +85,9 @@ print(len(x)) // returns 2
 
 var y record<name text, age int> = { name: "pj", age: 7 }
 print(len(y)) // returns 2
+
+var z record<name, age> = ["PJ", 7]
+print(z[0]) // returns "PJ"
+print(z[-1]) // returns  7
 `}>
 </CodeWrapper>
