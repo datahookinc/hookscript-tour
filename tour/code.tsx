@@ -12,15 +12,6 @@ const StyledCode = styled.section`
     position: relative;
     overflow: auto;
 
-    @media only screen and (max-width: 600px) {
-        width: 100%;
-        height: 1000px;
-        
-        .charged-resize-bar {
-            display: none;
-        }
-    }
-
     .charged-resize-bar {
         padding-left: 6px;
         padding-right: 6px;
@@ -36,12 +27,10 @@ const StyledCode = styled.section`
         .handle {
             height: 32px;
             width: 8px;
-            position: relative;
             position: fixed;
             border-radius: 2px;
             background-color: var(--purple-gray);
             box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
-            background-image: linear-gradient(45deg, #b2b7d1 25%, #202224 25%, #202224 50%, #b2b7d1 50%, #b2b7d1 75%, #202224 75%, #202224 100%);
             background-size: 2px 2px;
         }
 
@@ -92,7 +81,7 @@ const StyledCode = styled.section`
             opacity: 0.3;
 
             span {
-                counter-increment:  linenumber;
+                counter-increment: linenumber;
             }
 
             span::before {
@@ -125,12 +114,10 @@ const StyledCode = styled.section`
             .handle {
                 height: 8px;
                 width: 32px;
-                position: relative;
-                position: fixed;
+                position: absolute;
                 border-radius: 2px;
                 background-color: var(--purple-gray);
                 box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
-                background-image: linear-gradient(45deg, #b2b7d1 25%, #202224 25%, #202224 50%, #b2b7d1 50%, #b2b7d1 75%, #202224 75%, #202224 100%);
                 background-size: 2px 2px;
             }
 
@@ -144,8 +131,6 @@ const StyledCode = styled.section`
             display: block;
         }
 
-        // LEFT-OFF: vertical bar should not be usable on mobile; handle disappears on horizontal bar
-        
         .content {
             flex: 1 1;
             background-color: var(--context-background);
@@ -184,6 +169,15 @@ const StyledCode = styled.section`
         }
     }
 
+    @media only screen and (max-width: 600px) {
+        width: 100%;
+        height: 1000px;
+        
+        .charged-resize-bar {
+            display: none;
+        }
+    }
+
 `;
 
 const StyledLoading = styled.div`
@@ -206,7 +200,7 @@ const lineHeight = 18;
 export function CodeWrapper({ initialCode }: Props) {
     const [editorCode, setEditorCode] = useState(initialCode);
     const resetEditorCode = useRef(initialCode);
-    const [numLines, setNumLines] = useState(50);
+    const [numLines, setNumLines] = useState(10);
     const textArea = useRef<HTMLTextAreaElement | null>(null);
     const lineArea = useRef<HTMLDivElement | null>(null);
     const outputContainer = useRef<HTMLDivElement | null>(null);
@@ -221,19 +215,22 @@ export function CodeWrapper({ initialCode }: Props) {
     const isReady = useCompiler();
     const history = useRef<string[]>([]);
 
+    // set initial line numbers once ready and listen for resize to expand the line numbers as needed
     useLayoutEffect(() => {
         if (textArea.current) {
             const height = textArea.current.scrollHeight;
             setNumLines(Math.ceil(height / lineHeight));
             textAreaHeight.current = height;
-            resizeObserver.current = new ResizeObserver(() => {}); // Note: we don't need to run the callback, we only care about when the event is fired
+            const observer = new ResizeObserver(handleSetLineNums);
+            observer.observe(textArea.current);
+            resizeObserver.current = observer;
         }
         return () => {
             if (resizeObserver.current) {
                 resizeObserver.current.disconnect;
             }
         }
-    }, [])
+    }, [isReady])
 
     useEffect(() => {
         function handleMouseMove(e: MouseEvent) {
@@ -267,18 +264,6 @@ export function CodeWrapper({ initialCode }: Props) {
             }
         }
 
-        // Note: we don't pass the entries because we already have a global reference to the text area
-        function handleResize() {
-            handleSetLineNums();
-        }
-
-        if (textArea.current) {
-            const observer = new ResizeObserver(handleResize);
-            observer.observe(textArea.current);
-            resizeObserver.current = observer;
-
-        }
-
         function handleMouseUp() {
             draggingOutputBar.current = false;
             draggingFlexBar.current = false;
@@ -289,9 +274,6 @@ export function CodeWrapper({ initialCode }: Props) {
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseup', handleMouseUp);
-            if (resizeObserver.current) {
-                resizeObserver.current.disconnect();
-            }
         }
     }, []);
 
