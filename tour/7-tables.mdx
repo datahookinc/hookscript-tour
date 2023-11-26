@@ -1,0 +1,80 @@
+---
+title: "RECORD"
+slug: "7"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# Tables
+
+		In HookScript, `tables` are a container for storing multiple `records`. To create a table, you first specify the record type the table will hold and then assign its values
+		using a `list` or `dict`. Tables can only hold records that have values for the fields you specify.
+
+		Note: Tables are the newest data type in HookScript and will have improved functionality in future releases.
+
+		## Declare a table using lists
+		```
+		var t table<name text, age int> = [ ["PJ", 7], ["Cleo", 6] ]
+		```
+
+		## Declare a table using a dict
+		```
+		var t table<name text, age int> = { name: ["PJ", "Cleo"], age: [7, 6]  }
+		```
+
+		## Declare a table using a list of lists, dictionaries, and records
+		```
+		var r record<name text, age int> = ["PJ", "7"]
+		var d = { name: "Cleo", age: 6 }
+		var l = ["HookScript", 1]
+
+		var t table<name text, age int> = [ r, d, ["HookScript", 1] ]
+		```
+
+		**Note:** internally, the `table` type will cast `lists`, `records`, and `dicts` to the table's record type, which is why assignment is so flexible.
+
+		## Retrieving table records by index
+		
+		Tables allow you to retrieve records based on their row index. Indexes are zero-based (e.g., `[0]` references the first record in your table) and can be
+		negative (e.g., `[-1]` references the last record in your table)
+
+		```
+		var t table<name text, age int> = { name: ["PJ", "Cleo"], age: [7, 6]  }
+		var rec = t[0]
+		print(rec["name"]) // will print "PJ"
+		```
+
+		## Looping over records
+
+		Tables are iterable, with each iteration returning the next record
+
+		```
+		var t table<name text, age int> = [ ["PJ", 7], ["Cleo", 6] ]
+
+		var totalAge = 0
+		for rec of t:
+			totalAge += rec["age"]
+		end
+
+		print(totalAge) // will print 13
+		```
+	</div>
+
+	<Navigation back="/tour/6" forward="/tour/8" index="7" />
+
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`var t table<name text, age int> = [ ["PJ", 7], ["Cleo", 6] ]
+
+var totalAge = 0
+for rec of t:
+	totalAge += rec["age"]
+end
+
+print(totalAge) // will print 13
+`}>
+</CodeWrapper>

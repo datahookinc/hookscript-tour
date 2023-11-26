@@ -64,6 +64,14 @@ import { Navigation } from '../src/components/navigation.tsx'
 		x[1][2] // returns the 3rd element in the 2nd list, the value 6
 		```
 
+		## List methods
+
+		Lists come with built-in methods for common operations
+
+		- **push(...value)**: allows you to insert value(s) to the back of the list
+		- **prepend(...value)**: allows you to insert value(s) to the front of the list
+		- **pop()**: removes the last item in the list; returns `null` if list empty
+
 	</div>
 
 	<Navigation back="/tour/3" forward="/tour/5" index="4" />
@@ -78,5 +86,11 @@ print(y[1][2])
 
 var myList list = [10, 20, 30]
 print(30 in myList) // returns true
+
+var l = [1, 2, 3]
+l.push(10, 20, 30)
+l.prepend(-1, -2, -3)
+l.pop()
+print(l)
 `}>
 </CodeWrapper>

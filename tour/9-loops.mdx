@@ -1,0 +1,74 @@
+---
+title: "LOOPS"
+slug: "9"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# LOOPS
+
+		HookScript has a single loop statement starting with the **`for`** keyword, following your condition and a colon ( `:` ). The colon
+		starts a new `block` with its own scope for declaring variables local to that block. All `for` statements are terminated with the **`end`**
+		keyword.
+
+		## For loop
+
+		For general looping, the **`for`** loop uses a conditional statement to determine when to stop looping
+
+		```
+		var x = 0
+		for x < 10:
+			x++
+		end
+		print(x)
+		```
+
+		## For-of loop
+
+		For looping over an iterable (e.g., a **`list`**) you can use the **`of`** keyword. You must specify the variable name to hold the value for each iteration.
+		In the example below, we use the variable name **`el`**, but you can choose whichever name you like. The variable will be automatically scoped to the loop's block.
+
+		```
+		var myList = [10, 20, 30]
+		var total = 0
+		for el of myList:
+			total += el
+		end
+		```
+
+		Iterable types include:
+		
+		- **`list`**: each iteration returns the next value held in the list
+		- **`dict`**: each iteration returns the next property value held in the dict (order is not guaranteed)
+		- **`record`**: each iteration returns the next field value held in the record
+		- **`text`**: each iteration returns the next character
+		- **`table`**: each iteration returns the next record of the table
+
+	</div>
+
+	<Navigation back="/tour/8" forward="/tour/10" index="9" />
+
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`var x = 0
+for x < 10:
+	print(x)
+	x++
+end
+
+var myList = [10, 20, 30]
+var total = 0
+for el of myList:
+	total += el
+end
+print(total)
+
+for char of "hello":
+	print(char)
+end
+`}>
+</CodeWrapper>

@@ -30,7 +30,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 		x["is a cool cat"] // returns true
 		```
 
-		## Retrieving Values by field
+		## Retrieving values by field name
 		To retrieve a value from a record, use square brackets with the field name in quotes (e.g., `x["name"]`). A `null` value is returned if the field
 		is not in the record.
 
@@ -38,15 +38,15 @@ import { Navigation } from '../src/components/navigation.tsx'
 		x["name"] // returns "pj"
 		```
 		
-		## Assigning Values by field
-		To assign a value to a record, use square brackets with the field name in quotes (e.g., `x["name"]`). If the field does not exist on the record, an `invalid field`
+		## Assigning values by field name
+		To assign a value to a record by field name, use square brackets with the field name in quotes (e.g., `x["name"]`). If the field does not exist on the record, an `invalid field`
 		error will be thrown
 
 		```
-		x["name"] = "cleo"
+		x["name"] = "Cleo"
 		```
 
-		## Retrieving field value by index
+		## Retrieving values by field index
 		Records allow you to retrieve values based on their field index. Indexes are zero-based (e.g., `[0]` references the first field in your record) and can be
 		negative (e.g., `[-1]` references the last field in your record)
 
@@ -55,8 +55,16 @@ import { Navigation } from '../src/components/navigation.tsx'
 		x[0] // returns "PJ"
 		x[-1] // returns 7
 		```
+
+		## Assigning values by field index
+		Records allow you to assign values based on their field index. Indexes are zero-based (e.g., `[0]` references the first field in your record) and can be
+		negative (e.g., `[-1]` references the last field in your record)
+
+		```
+		x[0] = "Cleo"
+		```
 	
-		## Record Types
+		## Record types
 		Records can hold any type, including other records. You must specify at least one field name.
 		
 		To assign fields to a record, place the field names between `<` and `>` characters with their types:
@@ -89,5 +97,10 @@ print(len(y)) // returns 2
 var z record<name, age> = ["PJ", 7]
 print(z[0]) // returns "PJ"
 print(z[-1]) // returns  7
+
+z["name"] = "Cleo" // assign by field name
+z[1] = 6 // assign by field index
+
+print(z)
 `}>
 </CodeWrapper>

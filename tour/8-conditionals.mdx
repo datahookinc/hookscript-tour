@@ -1,0 +1,86 @@
+---
+title: "CONDITIONALS"
+slug: "8"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# CONDITIONALS
+
+		In HookScript, the `if` statement is used to evaluate conditional logic (e.g., true/false)
+
+		## if-elseif-else-end Statement
+		Start your conditional with the **`if`** keyword, followed by your condition and a colon ( `:` ). The colon starts a new `block` with
+		its own scope for declaring variables local to that block. All `if` statements are terminated with the **`end`** keyword, with additional
+		logic expressed through **`elseif`** and **`else`** blocks as required.
+
+		Examples:
+
+		```
+		if true:
+			print("yes")
+		else:
+			print("no")
+		end
+		```
+
+		```
+		var x = 10
+		if x > 10:
+			print("x is greater than 10")
+		elseif x > 8:
+			print("x is greater than 8")
+		elseif x > 6:
+			print("x is greater than 6")
+		else:
+			print("x is less than or equal to 6")
+		end
+		```
+
+		If statements can be expressed on a single line if desired:
+
+		```
+		if x > 10: return true end
+		```
+
+		## and/or
+		You can create multiple conditions using the **`and`** and **`or`** keywords:
+		
+		```
+		var x = 10
+		if x > 10 and x < 20:
+			print("x is between 10 and 20, exclusive")
+		elseif x == 10 or x == 20:
+			print("x is 10 or 20")
+		end
+		```
+
+
+	</div>
+
+	<Navigation back="/tour/7" forward="/tour/9" index="8" />
+
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`var x = 10
+if x > 10:
+	print("x is greater than 10")
+elseif x > 8:
+	print("x is greater than 8")
+elseif x > 6:
+	print("x is greater than 6")
+else:
+	print("x is less than or equal to 6")
+end
+
+if x > 10 and x < 20:
+	print("x is between 10 and 20, exclusive")
+elseif x == 10 or x == 20:
+	print("x is 10 or 20")
+end
+`}>
+</CodeWrapper>

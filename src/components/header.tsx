@@ -47,7 +47,7 @@ export function Header() {
                 <div>
                     <span className="header-1">HOOK</span>
                     <span className="header-2">SCRIPT</span>
-                    <sup>v0.7.0</sup>
+                    <sup>v0.8.0</sup>
                 </div>
             </Link>
         </StyledHeader>
