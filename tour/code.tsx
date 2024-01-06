@@ -18,22 +18,11 @@ const StyledCode = styled.section`
         position: absolute;
         left: -6px;
         height: 100%;
-        cursor: col-resize;
+        cursor: ew-resize;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
-        .handle {
-            height: 32px;
-            width: 8px;
-            position: fixed;
-            border-radius: 2px;
-            background-color: var(--purple-gray);
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
-            background-size: 2px 2px;
-        }
-
     }
 
     .charged-resize-bar::before {
@@ -106,21 +95,10 @@ const StyledCode = styled.section`
             position: absolute;
             top: -6px;
             width: 100%;
-            cursor: row-resize;
+            cursor: ns-resize;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            .handle {
-                height: 8px;
-                width: 32px;
-                position: absolute;
-                border-radius: 2px;
-                background-color: var(--purple-gray);
-                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
-                background-size: 2px 2px;
-            }
-
         }
 
         .charged-bar::before {
@@ -407,7 +385,6 @@ export function CodeWrapper({ initialCode }: Props) {
                         className="charged-bar"
                         onMouseDown={handleDragOutputBar}
                     >
-                        <div className="handle"></div>
                     </div>
                     <div className="content">
                         <div className="toolbar">
@@ -451,7 +428,6 @@ export function CodeWrapper({ initialCode }: Props) {
                 className="charged-resize-bar"
                 onMouseDown={handleDragFlexBar}
             >
-                <div className="handle"></div>
             </div>
         </StyledCode>
     )

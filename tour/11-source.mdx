@@ -1,0 +1,63 @@
+---
+title: "SOURCE"
+slug: "11"
+---
+
+import { InstructionsWrapper } from './instructions.tsx'
+import { CodeWrapper } from './code.tsx';
+import { Navigation } from '../src/components/navigation.tsx'
+
+<InstructionsWrapper>
+	<div className="instructions-main">
+		# SOURCE
+
+        The built-in `source` function in HookScript is used for pulling data. Data is **lazy loaded** into a **table**, along with the source's type information. The data is not retrieved until
+        the table is used in a context that requires the data (e.g., a **for-of** loop). 
+
+		## Datasets
+
+        HookScript has three built-in datasets that are always available. To access these datasets, prefix their names with **`dataset:`**:
+
+        - **`source("dataset:iris")`**: retrieves the popular iris dataset 
+        - **`source("dataset:cars")`**: retrieves the popular cars dataset 
+        - **`source("dataset:titanic")`**: retrieves the popular titanic dataset 
+
+		```
+        var iris = source("dataset:iris")
+        var total = 0
+        var i = 0
+        for sample of iris:
+            i++
+            total += sample["sepal_length"]
+        end
+        print("Average sepal length:", total / i)
+		```
+
+		## Local (not available in browser)
+
+        When running HookScript locally, you can pull data from the local file system. To access local files, prefix the absolute file path with **`local:`**:
+
+        - **`source("local:/absolute/path/to/file.csv")`**: retrieves a local file
+
+        ## Hub (not available in browser)
+
+        When connecting HookScript with the Hub, you can pull data from other sources in the Hub. To access sources in the hub, provide their domain location:
+
+        - **`source("/public/domain/source")`**: retrieves a source from the hub
+
+	</div>
+
+    <Navigation back="/tour/10" index="11" />
+
+</InstructionsWrapper>
+
+<CodeWrapper initialCode={`var iris = source("dataset:iris")
+var total = 0
+var i = 0
+for sample of iris:
+    i++
+    total += sample["sepal_length"]
+end
+print("Average sepal length:", total / i)
+`}>
+</CodeWrapper>

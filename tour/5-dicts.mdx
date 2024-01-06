@@ -60,7 +60,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 		var x dict<name> // the assigned dict must have a key called `name`, which accepts any value
 		var x dict<name text> // the assigned dict must have a key called `name` and its type must be `text`
 		var x dict<name text, age?> // the assigned dict has an optional key called `age`, which accepts any value
-		var x dict<name text, age int?> // the assigned dict has an optional key called `age` and its type must be `int`
+		var x dict<name text, age? int> // the assigned dict has an optional key called `age` and its type must be `int`
 		```
 
 		When your dict contains other dicts, you use multiple indexes to retrieve and assign values:

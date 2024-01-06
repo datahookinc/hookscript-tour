@@ -38,10 +38,9 @@ import Button from '@mui/material/Button';
 
 		- HookScript is an interpreted language, with gradual typing
 		- For this tour, HookScript was compiled to WebAssembly (WASM) so it will run entirely in your browser (no downloads, no server calls)
-		- HookScript provides syntax and conventions to make transforming data easier and more enjoyable
+		- HookScript provides syntax and conventions to make transforming and sharing data easier and more enjoyable
 		- Semicolons are optional when ending a statement or expression
-		- The language is in active development, so it is missing some core language features (arrow functions, datetime types, locks/immutability, user-defined types, etc.)
-		- The language is starting to incorporate domain specific constructs for data manipulation (e.g., streams, table/records types, etc.)
+		- The language is in active development
 		- You can click the "Run Code" button to run your code, or use `Shift + Enter` as a keyboard shortcut
 
 		### WHERE TO USE THE LANGUAGE
@@ -55,14 +54,49 @@ import Button from '@mui/material/Button';
 		
 		The following feedback is appreciated:
 
-		- How to make the language easier to work with for people who are new to programming (e.g., how to simplify the syntax, how to make some concepts easier to understand, etc.)
-		- What language features would support data manipulation/transformations (e.g., pipelines, table/column/row types, filtering, sorting, etc.)
+		- How to make the language easier to work with (e.g., how to simplify the syntax, how to make some concepts easier to understand, etc.)
+		- What language features would support data manipulation/transformations/sharing (e.g., pipelines, table/column/row types, filtering, sorting, etc.)
 		- Any bugs/issues you encounter when working with the language during this tour
 	</div>
 
 </InstructionsWrapper>
 
-<CodeWrapper initialCode={`var greeting = "Hello world"
-print(greeting)
+<CodeWrapper initialCode={`// find the average sepal length in the iris dataset
+// -------------------------------------------------
+
+var iris = source("dataset:iris")
+var total = 0
+var i = 0
+for sample of iris:
+	i++
+	total += sample["sepal_length"]
+end
+print("Average sepal length:", total / i)
+
+// find the maximum number of cylinders in the cars dataset
+// --------------------------------------------------------
+
+var cars = source("dataset:cars")
+var maxCylinders = 0
+for car of cars:
+	if car["cylinders"] > maxCylinders:
+		maxCylinders = car["cylinders"]
+	end
+end
+print("Maximum number of cylinders:", maxCylinders)
+
+// find the age and name of the youngest survivor of the Titanic
+// -------------------------------------------------------------
+
+var titanic = source("dataset:titanic")
+var minSurvivorAge = 100
+var survivorName
+for passenger of titanic:
+	if passenger["age"] < minSurvivorAge and passenger["survived"] == true:
+		minSurvivorAge = passenger["age"]
+		survivorName = passenger["name"] 
+	end
+end
+print("Minimum survivor name and age on Titanic:", survivorName + " (", minSurvivorAge, "years old )")
 `}>
 </CodeWrapper>

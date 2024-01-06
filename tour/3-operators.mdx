@@ -49,7 +49,8 @@ import { Navigation } from '../src/components/navigation.tsx'
 		## Built-in Functions
 		- **`len(object)`**: returns an `int` that is the number of characters in a `text` value, the number of elements in an `array` value, or the number of elements in a `map` value
 		- **`print(...objects)`**: prints the provided object(s) to the console; returns the number of bytes written to the console
-		- **`type(object)`**: returns the underlying type of an object as text
+		- **`typeof(object)`**: returns the underlying type of an object as text
+		- **`source(path)`**: pulls data into HookScript for processing
 
 		Examples:
 
@@ -68,7 +69,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 		!true // returns false
 		-(10 * 2) // returns -20
 		print("hello") // prints "text" to the console
-		print(type("hello")) // prints "text" to the console
+		print(typeof("hello")) // prints "text" to the console
 		print("ll" in "hello") // returns true
 		print(40 in [10, 20, 30]) // returns false
 		print("name" in { name: "PJ", age: 7 }) // returns true
@@ -92,7 +93,7 @@ print(len("hello world")) // returns 11
 print(len(["a", "b", "c"])) // returns 3
 print(!true) // returns false
 print(-(10 * 2)) // returns -20
-print(type("hello")) // prints "text" to the console
+print(typeof("hello")) // prints "text" to the console
 print("ll" in "hello") // returns true
 print(40 in [10, 20, 30]) // returns false
 print("name" in { name: "PJ", age: 7 }) // returns true

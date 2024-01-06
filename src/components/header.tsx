@@ -43,13 +43,13 @@ const StyledHeader = styled.header`
 export function Header() {
     return (
         <StyledHeader>
-            <Link to="/tour/welcome">
                 <div>
-                    <span className="header-1">HOOK</span>
-                    <span className="header-2">SCRIPT</span>
-                    <sup>v0.8.0</sup>
+                    <Link to="/tour/welcome">
+                            <span className="header-1">HOOK</span>
+                            <span className="header-2">SCRIPT</span>
+                            <sup>v0.9.0</sup>
+                    </Link>
                 </div>
-            </Link>
         </StyledHeader>
     )
 }

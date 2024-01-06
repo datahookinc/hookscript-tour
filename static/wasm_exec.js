@@ -540,9 +540,14 @@
 
 		_resume() {
 			if (this.exited) {
-				throw new Error("Go program has already exited");
+				// throw new Error("Runtime has exited on an error; please refresh your browser to reset the runtime");
+				// restart the runtime if it has exited
+				this.run(this._inst);
+				return;
 			}
 			this._inst.exports.resume();
+
+			// this is now unreachable
 			if (this.exited) {
 				this._resolveExitPromise();
 			}

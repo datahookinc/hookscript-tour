@@ -27,6 +27,7 @@ import { Navigation } from '../src/components/navigation.tsx'
 		- `list` - a list of values
 		- `dict` - a dynamic collection of key-value pairs
 		- `record` - a static collection of key-value pairs
+		- `table` - a collection of records
 
 		```
 var i int = 0
@@ -36,6 +37,7 @@ var f float = 1.0
 var l list = [1, 2, 3]
 var d dict = { name: "pj", age: 7}
 var r record<name, age> = ["pj", 7]
+var tbl table<name, age> = [ ["PJ", 7], ["Cleo", 6] ]
 var a any = 1
 		```
 
@@ -88,6 +90,14 @@ var a any = 1
 		var pj cat = ["PJ", 7]
 		print(pj["name"])
 		```
+
+		## Named type methods
+
+		Named types come with built-in methods
+
+		- **baseType()**: provides the underlying type for the named type as text
+		- **inheritance()**: provides the inheritance chain for the named type as a list. The last item in the list will match what is returned by **baseType()**
+
 	</div>
 
 	<Navigation back="/tour/1" forward="/tour/3" index="2" />
@@ -101,12 +111,17 @@ var f float = 1.0
 var l list = [1, 2, 3]
 var d dict = { name: "pj", age: 7}
 var r record<name, age> = ["pj", 7]
+var tbl table<name, age> = [ ["PJ", 7], ["Cleo", 6] ]
 var a any = 1
 var u int | text = 10
+
+print(i, b, t, f, l, d, r, a, u, tbl)
 
 type cat = record<name text, age int>
 var pj cat = ["PJ", 7]
 
-print(i, b, t, f, l, d, r, a, pj, u)
+print(pj)
+print(pj.baseType())
+print(pj.inheritance())
 `}>
 </CodeWrapper>
