@@ -47,7 +47,7 @@ export function Header() {
                     <Link to="/tour/welcome">
                             <span className="header-1">HOOK</span>
                             <span className="header-2">SCRIPT</span>
-                            <sup>v0.9.0</sup>
+                            <sup>v0.9.1</sup>
                     </Link>
                 </div>
         </StyledHeader>
